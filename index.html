@@ -328,29 +328,31 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 .sq-t.sel .sq-b{color:#5b3a00}
 .sq-star{color:var(--dim);font-size:15px;transition:.2s}
 .sq-star.on{color:var(--amber);text-shadow:0 0 10px rgba(245,165,36,.7)}
-#sol-active{--cw:clamp(44px,11.5vw,66px);--ch:calc(var(--cw)*1.4)}
-.sol-top{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px}
-.sol-fds{display:flex;gap:8px;margin-left:auto}
-.pcard{width:var(--cw);height:var(--ch);border-radius:9px;border:1px solid rgba(0,0,0,.25);background:#f4f6fb;color:#1c2438;display:flex;flex-direction:column;justify-content:space-between;padding:5px 6px;font-weight:800;font-size:calc(var(--cw)*.26);cursor:pointer;user-select:none;box-shadow:0 3px 8px rgba(0,0,0,.4);position:relative}
-.pcard.red{color:#c2273d}
-.pcard i{font-style:normal;align-self:flex-end;font-size:calc(var(--cw)*.34)}
-.pcard.back{background:repeating-linear-gradient(45deg,#2f5bff,#2f5bff 6px,#3b6cff 6px,#3b6cff 12px);border-color:#1e3fae}
-.pcard.empty{background:rgba(255,255,255,.04);border:2px dashed var(--line2);color:var(--dim);display:grid;place-items:center;box-shadow:none}
-.pcard.sel{outline:3px solid var(--amber);transform:translateY(-3px)}
-.sol-tab{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:560px;margin:0 auto}
-.sol-col{min-height:var(--ch);border-radius:9px}
+.tab-diff{font-size:9px;font-weight:800;padding:1px 6px;border-radius:6px;background:rgba(255,255,255,.12);color:var(--muted)}
+.tab-btn.on .tab-diff{background:rgba(255,255,255,.22);color:#fff}
+#sol-need{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:28px;font-weight:800;color:#241500;background:linear-gradient(135deg,#f5a524,#d97706)}
+.sol-chain-row{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:10px 12px;border-radius:12px;background:rgba(6,10,22,.6);border:1px solid var(--line);min-height:48px}
+.sol-chain-row .found-chip{flex-shrink:0}
+.sol-arrow{color:var(--dim);font-weight:800;flex-shrink:0}
+#sol-lives{color:var(--red);font-size:16px;letter-spacing:2px}
 #bf-stage{position:relative;height:min(60vh,520px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);background:#070b16;touch-action:none}
 #bf-stage canvas{display:block;width:100%;height:100%}
 .bf-hud{position:absolute;z-index:5;pointer-events:none}
-#bf-vignette{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(circle,transparent 40%,rgba(244,63,94,.5));opacity:0;transition:opacity .12s}
+#bf-vignette{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(244,63,94,.55));opacity:0;transition:opacity .12s}
 #bf-cross{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:rgba(255,255,255,.8);z-index:5;pointer-events:none}
-#bf-floats{position:absolute;left:0;right:0;top:26%;z-index:6;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
-.bf-float{font-weight:800;font-size:20px;text-shadow:0 2px 8px rgba(0,0,0,.8);animation:bfloat 1.1s ease forwards}
-@keyframes bfloat{from{opacity:0;transform:translateY(10px)}20%{opacity:1}to{opacity:0;transform:translateY(-26px)}}
-#bf-type{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(4,7,15,.55);backdrop-filter:blur(3px)}
+#bf-floats{position:absolute;left:0;right:0;top:22%;z-index:6;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.bf-float{font-weight:800;font-size:20px;text-shadow:0 2px 10px rgba(0,0,0,.9);animation:bfloat 1.1s ease forwards}
+.bf-cast{font-size:15px;letter-spacing:.18em;text-transform:uppercase;animation:bfloat 1.2s ease forwards}
+@keyframes bfloat{from{opacity:0;transform:translateY(10px)}18%{opacity:1}to{opacity:0;transform:translateY(-26px)}}
+#bf-type{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(4,7,15,.42);backdrop-filter:blur(2px)}
 .bf-touch{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 .bf-touch .btn{min-width:74px}
-@media(max-width:560px){#bf-stage{height:52vh}.sol-top{gap:5px}.sol-fds{gap:5px}}
+.bf-ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.bf-ai-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 4px;border-radius:11px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--muted);font:inherit;font-size:10.5px;font-weight:800;line-height:1.15;text-align:center;cursor:pointer;transition:.15s}
+.bf-ai-btn i{font-size:17px}
+.bf-ai-btn:hover{background:rgba(255,255,255,.09);transform:translateY(-1px)}
+.bf-ai-btn.on{box-shadow:0 0 0 1px currentColor,0 8px 20px -10px currentColor}
+@media(max-width:560px){#bf-stage{height:52vh}.bf-ai-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -671,19 +673,19 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <section class="view" id="view-games">
 <div class="view-h"><h2>Word Games</h2><span class="chip" id="dict-badge"><i class="fa-solid fa-circle-notch fa-spin"></i> Dictionary loading…</span></div>
 <div class="tabs" id="game-tabs">
-<button class="tab-btn on" data-action="game-tab" data-game="tetris" id="tab-tetris"><i class="fa-solid fa-shapes" style="color:var(--violet)"></i> Vocabtetris</button>
-<button class="tab-btn" data-action="game-tab" data-game="blocky" id="tab-blocky"><i class="fa-solid fa-cubes-stacked" style="color:var(--blue)"></i> Vocablocky</button>
-<button class="tab-btn" data-action="game-tab" data-game="scrabble" id="tab-scrabble"><i class="fa-solid fa-font" style="color:var(--amber)"></i> Scrabble</button>
-<button class="tab-btn" data-action="game-tab" data-game="bee" id="tab-bee"><i class="fa-solid fa-bug" style="color:var(--amber)"></i> Spelling Bee</button>
-<button class="tab-btn" data-action="game-tab" data-game="wordle" id="tab-wordle"><i class="fa-solid fa-border-all" style="color:var(--green)"></i> Wordle</button>
-<button class="tab-btn" data-action="game-tab" data-game="spellmaster" id="tab-spellmaster"><i class="fa-solid fa-stopwatch" style="color:var(--cyan)"></i> Spelling Master</button>
-<button class="tab-btn" data-action="game-tab" data-game="birds" id="tab-birds"><i class="fa-solid fa-crow" style="color:var(--green)"></i> Worldy Birds</button>
-<button class="tab-btn" data-action="game-tab" data-game="squaredle" id="tab-squaredle"><i class="fa-solid fa-table-cells-large" style="color:var(--pink)"></i> Squaredle</button>
-<button class="tab-btn" data-action="game-tab" data-game="solitaire" id="tab-solitaire"><i class="fa-solid fa-diamond" style="color:var(--red)"></i> Solitaire</button>
-<button class="tab-btn" data-action="game-tab" data-game="boss" id="tab-boss"><i class="fa-solid fa-dragon" style="color:var(--violet)"></i> Word Boss 3D</button>
+<button class="tab-btn on" data-action="game-tab" data-game="boss" id="tab-boss"><i class="fa-solid fa-dragon" style="color:var(--violet)"></i> Word Boss 3D <span class="tab-diff">10</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="solitaire" id="tab-solitaire"><i class="fa-solid fa-link" style="color:var(--red)"></i> Solitaire <span class="tab-diff">9</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="squaredle" id="tab-squaredle"><i class="fa-solid fa-table-cells-large" style="color:var(--pink)"></i> Squaredle <span class="tab-diff">8</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="birds" id="tab-birds"><i class="fa-solid fa-crow" style="color:var(--green)"></i> Worldy Birds <span class="tab-diff">7</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="spellmaster" id="tab-spellmaster"><i class="fa-solid fa-stopwatch" style="color:var(--cyan)"></i> Spelling Master <span class="tab-diff">6</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="tetris" id="tab-tetris"><i class="fa-solid fa-shapes" style="color:var(--violet)"></i> Vocabtetris <span class="tab-diff">5</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="blocky" id="tab-blocky"><i class="fa-solid fa-cubes-stacked" style="color:var(--blue)"></i> Vocablocky <span class="tab-diff">4</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="scrabble" id="tab-scrabble"><i class="fa-solid fa-font" style="color:var(--amber)"></i> Scrabble <span class="tab-diff">3</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="bee" id="tab-bee"><i class="fa-solid fa-bug" style="color:var(--amber)"></i> Spelling Bee <span class="tab-diff">2</span></button>
+<button class="tab-btn" data-action="game-tab" data-game="wordle" id="tab-wordle"><i class="fa-solid fa-border-all" style="color:var(--green)"></i> Wordle <span class="tab-diff">1</span></button>
 </div>
 <!-- TETRIS -->
-<div class="game-pane on" id="game-tetris">
+<div class="game-pane" id="game-tetris">
 <div class="game-head"><h3><i class="fa-solid fa-shapes" style="color:var(--violet)"></i> Vocabtetris</h3>
 <div class="row gap-1 wrap"><span class="chip chip-v">Score <b id="t-score">0</b></span><span class="chip chip-v">Words <b id="t-words">0</b></span><span class="chip">Best <b id="t-best">0</b></span></div></div>
 <div id="t-setup" class="card pad" style="text-align:center">
@@ -1066,44 +1068,60 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 </div>
 </div>
 </div>
-<!-- SOLITAIRE -->
+<!-- SOLITAIRE (WORD CHAIN) -->
 <div class="game-pane" id="game-solitaire">
-<div class="game-head"><h3><i class="fa-solid fa-diamond" style="color:var(--red)"></i> Solitaire</h3>
-<div class="row gap-1 wrap"><span class="chip">Score <b id="sol-score">0</b></span><span class="chip">Moves <b id="sol-moves">0</b></span><span class="chip">Time <b id="sol-time">0:00</b></span><span class="chip">Best <b id="sol-best">0</b></span></div></div>
+<div class="game-head"><h3><i class="fa-solid fa-link" style="color:var(--red)"></i> Solitaire · Word Chain</h3>
+<div class="row gap-1 wrap"><span class="chip">Score <b id="sol-score">0</b></span><span class="chip">Chain <b id="sol-chain-count">0</b></span><span class="chip">Best <b id="sol-best">0</b></span></div></div>
 <div id="sol-setup" class="card pad" style="text-align:center">
-<div class="setup-ic" style="background:rgba(244,63,94,.15);color:var(--red)"><i class="fa-solid fa-diamond"></i></div>
-<h3 class="t-lg mb-1">Classic Klondike, draw one</h3>
+<div class="setup-ic" style="background:rgba(244,63,94,.15);color:var(--red)"><i class="fa-solid fa-link"></i></div>
+<h3 class="t-lg mb-1">apple → entertainment → table → …</h3>
 <span class="chip mb-2" style="color:#ff9db1;border-color:rgba(244,63,94,.4)">Difficulty 9/10 ★★★★★★★★★☆</span>
 <ul class="rules mb-3 mt-2">
-<li><i class="fa-solid fa-check"></i> Build the four foundations from Ace to King by suit.</li>
-<li><i class="fa-solid fa-check"></i> On the tableau, stack cards in descending order with alternating colors. Only Kings fill empty columns.</li>
-<li><i class="fa-solid fa-check"></i> Tap a card to select it (or its whole run), then tap the destination. Double-tap sends a card to its foundation.</li>
-<li><i class="fa-solid fa-check"></i> Tap the stock to draw. Undo anytime; Auto-finish sweeps everything home once the stock is empty and all cards are face-up.</li>
+<li><i class="fa-solid fa-check"></i> Every new word must start with the LAST letter of the previous word.</li>
+<li><i class="fa-solid fa-check"></i> Dictionary words only · no repeats · beat the countdown — it shrinks as your chain grows.</li>
+<li><i class="fa-solid fa-check"></i> 3 hearts: each timeout costs one. 3 hints per run (−5 pts each).</li>
+<li><i class="fa-solid fa-check"></i> Score = 2 pts per letter + seconds left (+10 for words of 8+ letters). Hit a dead end for a +50 bonus.</li>
 </ul>
-<button class="btn btn-d btn-big" data-action="sol-start"><i class="fa-solid fa-play"></i> Deal the cards</button>
+<div class="card pad mb-3" style="max-width:420px;margin:0 auto;text-align:left;background:rgba(244,63,94,.08)">
+<span class="label">Minimum word length</span>
+<label class="radio-row"><input type="radio" name="sol-min" value="3" checked> 3+ letters <span class="chip chip-g" style="margin-left:auto">Recommended</span></label>
+<label class="radio-row"><input type="radio" name="sol-min" value="4"> 4+ letters <span class="chip chip-a" style="margin-left:auto">Hard</span></label>
+<label class="radio-row"><input type="radio" name="sol-min" value="5"> 5+ letters <span class="chip" style="margin-left:auto;color:#ff9db1">Extreme</span></label>
+</div>
+<button class="btn btn-d btn-big" data-action="sol-start"><i class="fa-solid fa-play"></i> Start the chain</button>
 </div>
 <div id="sol-active" class="hide board-wrap">
 <div class="row between wrap gap-2 mb-2">
-<span class="t-xs dim bold">KLONDIKE · DRAW 1</span>
-<div class="row gap-1"><button class="btn btn-xs btn-g" data-action="sol-undo"><i class="fa-solid fa-rotate-left"></i> Undo</button><button class="btn btn-xs btn-g" data-action="sol-auto"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto-finish</button><button class="btn btn-xs btn-g" data-action="sol-start"><i class="fa-solid fa-rotate-right"></i> New deal</button></div>
+<div class="row gap-2"><span class="t-xs dim bold">NEXT WORD STARTS WITH</span><span id="sol-need">e</span><span id="sol-lives">♥♥♥</span></div>
+<div class="row gap-1"><button class="btn btn-xs btn-g" data-action="sol-hint"><i class="fa-solid fa-lightbulb"></i> Hint ×<span id="sol-hints">3</span></button><button class="btn btn-xs btn-g" data-action="sol-start"><i class="fa-solid fa-rotate-right"></i> New chain</button></div>
 </div>
-<div class="sol-top">
-<div id="sol-stock"></div>
-<div id="sol-waste"></div>
-<div class="sol-fds" id="sol-fd"></div>
+<div class="row between t-xs bold muted mb-1"><span><i class="fa-solid fa-stopwatch"></i> Time left</span><span id="sol-time">20s</span></div>
+<div class="progress mb-3"><i id="sol-timerbar" style="width:100%;background:linear-gradient(90deg,#22c55e,#15803d)"></i></div>
+<div class="sol-chain-row mb-3" id="sol-chain-row"></div>
+<div class="card pad" style="text-align:center">
+<form id="sol-form" style="max-width:440px;margin:0 auto">
+<input id="sol-input" class="field" style="text-align:center;font-size:19px;font-weight:700" placeholder="a word starting with…" autocomplete="off" spellcheck="false">
+<button type="submit" class="btn btn-d mt-2" style="width:100%"><i class="fa-solid fa-link"></i> Link it</button>
+</form>
+<p class="t-xs mt-2" style="color:var(--red);min-height:16px" id="sol-msg"></p>
+<div id="sol-hint-box" class="hide feedback ok mt-1" style="text-align:left"></div>
 </div>
-<div class="sol-tab" id="sol-tab"></div>
-<p class="t-xs dim mt-2" style="text-align:center">Keys: U undo · D draw · N new deal · double-tap a card to send it home</p>
+<div class="card pad mt-3" style="padding:15px">
+<div class="row between mb-1"><span class="label" style="margin:0">Chained words (<span id="sol-found-count">0</span>)</span><button class="btn btn-xs btn-g" data-action="sol-found-toggle" id="sol-found-toggle" style="border:none;color:#ff9db1">Show list</button></div>
+<div id="sol-found" class="found-list hide"></div>
+</div>
 <div id="sol-over" class="gov hide">
-<i class="fa-solid fa-crown big-ic" style="color:var(--amber)"></i>
-<h3 style="font-size:24px">You won!</h3>
-<p class="bold" style="font-size:20px;color:#ffd48a">Score <span id="sol-final">0</span> · Time <span id="sol-final-time">0:00</span></p>
-<button class="btn btn-d mt-1" data-action="sol-start"><i class="fa-solid fa-rotate-right"></i> New deal</button>
+<i class="fa-solid fa-link big-ic" style="color:var(--red)"></i>
+<h3 style="font-size:24px" id="sol-over-title">Chain over!</h3>
+<p class="muted t-sm" id="sol-over-msg"></p>
+<p class="bold" style="font-size:20px;color:#ff9db1">Score <span id="sol-final">0</span> · Chain <span id="sol-final-chain">0</span> words</p>
+<p class="t-xs dim">Longest word: <b class="mono" id="sol-final-long">—</b></p>
+<button class="btn btn-d mt-1" data-action="sol-start"><i class="fa-solid fa-rotate-right"></i> New chain</button>
 </div>
 </div>
 </div>
 <!-- WORD BOSS 3D -->
-<div class="game-pane" id="game-boss">
+<div class="game-pane on" id="game-boss">
 <div class="game-head"><h3><i class="fa-solid fa-dragon" style="color:var(--violet)"></i> Word Boss 3D</h3>
 <div class="row gap-1 wrap"><span class="chip chip-v">Level <b id="bf-level">1</b></span><span class="chip chip-v">Damage <b id="bf-score">0</b></span><span class="chip">Words <b id="bf-used">0</b></span><span class="chip">Best Lv <b id="bf-best">0</b></span></div></div>
 <div id="bf-setup" class="card pad" style="text-align:center">
@@ -1112,12 +1130,25 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <span class="chip chip-v mb-2">Difficulty 10/10 ★★★★★★★★★★</span>
 <ul class="rules mb-3 mt-2">
 <li><i class="fa-solid fa-check"></i> Boss HP = level² × 100 (mobile: level² × 50). Beat it, level up, forever.</li>
-<li><i class="fa-solid fa-check"></i> WASD move · mouse look · E slide (brief invulnerability) · Q word-nova (clears bullets + damage) · H use a heal item. Green orbs refill heals.</li>
-<li><i class="fa-solid fa-check"></i> Press the attack button (default M1) to type a word — each valid word fires a bolt. Words can’t repeat during a run. Time slows while you type.</li>
-<li><i class="fa-solid fa-check"></i> Damage = length bonus (3→1, 4→2, 5→4, 6→6, 7+→12+2×len) + letter points: 1 pt A E I O U L N S T R D G · 2 pts B C M P F H V W Y · 4 pts K J X · 6 pts Q Z.</li>
-<li><i class="fa-solid fa-check"></i> On touch screens you get a move pad, drag-to-look and on-screen buttons.</li>
+<li><i class="fa-solid fa-check"></i> The boss casts <b>telegraphed skills</b> — aimed bolts, spread fans, radial bursts, sky rain, sweeping lasers, spiral storms, bullet walls with gaps, hunter orbs, ground slams and cross lasers. Read the warning, then dodge.</li>
+<li><i class="fa-solid fa-check"></i> WASD / arrows move · mouse look · <b>E</b> slide (i-frames) · <b>Q</b> nova (clears bullets &amp; shockwaves) · <b>H</b> heal. Green orbs refill heals.</li>
+<li><i class="fa-solid fa-check"></i> <b style="color:#ff9db1">On PC the fight does NOT stop while you type.</b> The boss keeps casting and can hit you — dodge with the arrow keys and slide with Shift without leaving the word box. On mobile the fight pauses while typing.</li>
+<li><i class="fa-solid fa-check"></i> Damage = length bonus (3→1, 4→2, 5→4, 6→6, 7+→12+2×len) + letter points: 1 pt A E I O U L N S T R D G · 2 pts B C M P F H V W Y · 4 pts K J X · 6 pts Q Z. No word repeats in a run.</li>
 </ul>
-<div class="card pad mb-3" style="max-width:420px;margin:0 auto;text-align:left;background:rgba(139,92,246,.08)">
+<div class="card pad mb-3" style="max-width:470px;margin:0 auto;text-align:left;background:rgba(244,63,94,.07)">
+<label class="label"><i class="fa-solid fa-skull" style="color:var(--red)"></i> Boss AI strength — more skills &amp; faster attacks each tier</label>
+<div class="bf-ai-grid" id="bf-ai-grid">
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="easy"><i class="fa-solid fa-face-smile"></i>Easy</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="medium"><i class="fa-solid fa-face-meh"></i>Medium</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="hard"><i class="fa-solid fa-face-frown"></i>Hard</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="insane"><i class="fa-solid fa-face-angry"></i>Insane</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="edemon"><i class="fa-solid fa-skull"></i>Easy Demon</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="hdemon"><i class="fa-solid fa-skull-crossbones"></i>Hard Demon</button>
+<button class="bf-ai-btn" data-action="bf-ai" data-ai="xdemon"><i class="fa-solid fa-dragon"></i>Extreme Demon</button>
+</div>
+<p class="t-xs mt-2" id="bf-ai-desc" style="line-height:1.7"></p>
+</div>
+<div class="card pad mb-3" style="max-width:470px;margin:0 auto;text-align:left;background:rgba(139,92,246,.08)">
 <label class="label">Look sensitivity: <span id="bf-sens-val" style="color:var(--violet)">1.2</span></label>
 <input type="range" id="bf-sens" min="0.4" max="3" step="0.1" value="1.2">
 <label class="label mt-2">Word-attack button</label>
@@ -1145,12 +1176,12 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <div class="row between t-xs bold" style="color:#8ce7ad"><span><i class="fa-solid fa-heart"></i> You · <span id="bf-hp">100</span> HP</span><span>✚ <span id="bf-heals">1</span></span></div>
 <div class="progress mt-1"><i id="bf-hpbar" style="width:100%;background:linear-gradient(90deg,#22c55e,#15803d)"></i></div>
 </div>
-<div class="bf-hud" style="bottom:10px;right:12px"><span class="chip chip-v t-xs">NOVA <b id="bf-nova-cd">READY</b></span></div>
+<div class="bf-hud" style="bottom:10px;right:12px;display:flex;gap:6px"><span class="chip t-xs" id="bf-tier">Medium</span><span class="chip chip-v t-xs">NOVA <b id="bf-nova-cd">READY</b></span></div>
 <div id="bf-cross"></div>
 <div id="bf-vignette"></div>
 <div id="bf-floats"></div>
 <div id="bf-type" class="hide">
-<div class="card pad" style="width:min(360px,92%);text-align:center">
+<div class="card pad" style="width:min(370px,92%);text-align:center">
 <span class="label"><i class="fa-solid fa-keyboard" style="color:var(--cyan)"></i> Type a word to attack</span>
 <form id="bf-form">
 <input id="bf-input" class="field" style="text-align:center;font-size:19px;font-weight:800" placeholder="longer words hit harder…" autocomplete="off" spellcheck="false">
@@ -1160,7 +1191,8 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 </div>
 </form>
 <p class="t-xs mt-2" style="color:var(--red);min-height:16px" id="bf-type-msg"></p>
-<p class="t-xs dim">No repeats this run · time slows while you type</p>
+<p class="t-xs bold" id="bf-type-warn" style="min-height:16px"></p>
+<p class="t-xs dim">No repeats this run · Esc closes</p>
 </div>
 </div>
 </div>
@@ -1178,6 +1210,18 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <div id="bf-paused" class="gov hide">
 <i class="fa-solid fa-pause big-ic" style="color:var(--cyan)"></i>
 <h3 style="font-size:22px">Paused</h3>
+<div style="width:min(280px,88%)">
+<label class="label" style="text-align:left">Boss AI strength (applies instantly)</label>
+<select id="bf-ai2" class="field">
+<option value="easy">Easy</option>
+<option value="medium">Medium</option>
+<option value="hard">Hard</option>
+<option value="insane">Insane</option>
+<option value="edemon">Easy Demon</option>
+<option value="hdemon">Hard Demon</option>
+<option value="xdemon">Extreme Demon</option>
+</select>
+</div>
 <button class="btn btn-p mt-1" data-action="bf-pause"><i class="fa-solid fa-play"></i> Resume</button>
 </div>
 <div id="bf-clear" class="gov hide">
@@ -1270,13 +1314,13 @@ return decodeURIComponent(escape(atob(t)));
 };
 /* ---------- persistent state ---------- */
 const KEY="vocabMaster.v5";
-let state={vaults:{},activeId:"default",sound:true,best:{tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},wordle:{wins:0,streak:0,score:0},sent:{tries:0,best:0,total:0},recent:[],lastVault:null,updatedAt:0,cloud:{on:false,name:"",ref:null},bfcfg:{sens:1.2,atk:"m1"}};
+let state={vaults:{},activeId:"default",sound:true,best:{tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},wordle:{wins:0,streak:0,score:0},sent:{tries:0,best:0,total:0},recent:[],lastVault:null,updatedAt:0,cloud:{on:false,name:"",ref:null},bfcfg:{sens:1.2,atk:"m1",ai:"medium"}};
 function seed(){state.vaults={default:{name:"My Vault",words:[]}};}
 function save(){state.updatedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}cloudSchedule();}
 function load(){
 try{
 const raw=localStorage.getItem(KEY);
-if(raw){const p=JSON.parse(raw);if(p&&p.vaults&&Object.keys(p.vaults).length){state=Object.assign(state,p);state.best=Object.assign({tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},p.best||{});state.bfcfg=Object.assign({sens:1.2,atk:"m1"},p.bfcfg||{});state.wordle=Object.assign({wins:0,streak:0,score:0},p.wordle||{});state.sent=Object.assign({tries:0,best:0,total:0},p.sent||{});state.cloud=Object.assign({on:false,name:"",ref:null},p.cloud||{});if(!state.cloud.ref)state.cloud.on=false;state.recent=Array.isArray(p.recent)?p.recent:[];state.lastVault=p.lastVault||null;state.updatedAt=p.updatedAt||0;if(!state.vaults[state.activeId])state.activeId=Object.keys(state.vaults)[0];return;}}
+if(raw){const p=JSON.parse(raw);if(p&&p.vaults&&Object.keys(p.vaults).length){state=Object.assign(state,p);state.best=Object.assign({tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},p.best||{});state.bfcfg=Object.assign({sens:1.2,atk:"m1",ai:"medium"},p.bfcfg||{});state.wordle=Object.assign({wins:0,streak:0,score:0},p.wordle||{});state.sent=Object.assign({tries:0,best:0,total:0},p.sent||{});state.cloud=Object.assign({on:false,name:"",ref:null},p.cloud||{});if(!state.cloud.ref)state.cloud.on=false;state.recent=Array.isArray(p.recent)?p.recent:[];state.lastVault=p.lastVault||null;state.updatedAt=p.updatedAt||0;if(!state.vaults[state.activeId])state.activeId=Object.keys(state.vaults)[0];return;}}
 const old=localStorage.getItem("vocabMaster.v4")||localStorage.getItem("vocabMaster.v3")||localStorage.getItem("vocabMasterVaults");
 if(old){
 let p=JSON.parse(old),ov=p&&p.vaults?p.vaults:p;
@@ -1333,7 +1377,9 @@ clear:()=>{[523,659,784].forEach((f,i)=>tone(f,.09,"triangle",.11,i*.07));},
 win:()=>{[523,659,784,1046].forEach((f,i)=>tone(f,.14,"triangle",.12,i*.1));},
 lose:()=>{tone(220,.25,"sawtooth",.09);tone(140,.35,"sawtooth",.09,.16);},
 flip:()=>tone(720,.05,"sine",.07),
-err:()=>tone(150,.13,"square",.08)
+err:()=>tone(150,.13,"square",.08),
+cast:()=>{tone(880,.08,"sawtooth",.05);tone(660,.12,"sawtooth",.05,.06);},
+warn:()=>tone(320,.18,"triangle",.07)
 };
 function speak(text){
 if(!state.sound){toast("Sound is muted — use the speaker button in the top bar.","err");return;}
@@ -1547,7 +1593,7 @@ const arr=words(),from=arr.findIndex(w=>w.id===dragId),to=arr.findIndex(w=>w.id=
 if(from>-1&&to>-1&&from!==to){const [m]=arr.splice(from,1);arr.splice(to,0,m);save();renderWords();}
 dragId=null;
 });
-/* ---------- dictionary lookup (Cambridge: words, idioms, phrasal verbs) ---------- */
+/* ---------- dictionary lookup ---------- */
 const defCache=new Map();
 let tempDefs=[],tempWord="",lookupSession=0;
 const CAMB_BASE="https://dictionary.cambridge.org/dictionary/english/";
@@ -2028,12 +2074,12 @@ target.words.unshift({id:uid(),word:w,definitions:[{pos:o.pos,def:o.def}],addedA
 save();renderVaults();renderWords();FC.dirty=true;Sfx.clear();
 toast('"'+w+'" added to '+target.name+".","ok");
 }
-/* ---------- games hub ---------- */
-const Games={tab:"tetris"};
+/* ---------- games hub (difficulty high → low) ---------- */
+const Games={tab:"boss"};
 function showGame(g){
 if(Games.tab!==g){T.pause(true);Birds.pause(true);BF.pause(true);SOL.pause();SM.stop();}
 Games.tab=g;
-["tetris","blocky","scrabble","bee","wordle","spellmaster","birds","squaredle","solitaire","boss"].forEach(k=>{
+["boss","solitaire","squaredle","birds","spellmaster","tetris","blocky","scrabble","bee","wordle"].forEach(k=>{
 $("game-"+k).classList.toggle("on",k===g);
 $("tab-"+k).classList.toggle("on",k===g);
 });
@@ -2787,7 +2833,7 @@ $("sl-result").classList.remove("hide");
 $("sl-word").addEventListener("change",e=>SL.pick(e.target.value));
 $("sl-input").addEventListener("input",()=>{const n=($("sl-input").value.trim().match(/\S+/g)||[]).length;$("sl-count").textContent=n+" word"+(n===1?"":"s");});
 $("sl-input").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){e.preventDefault();SL.check();}});
-/* ---------- free cloud (no account, no API key) ---------- */
+/* ---------- free cloud ---------- */
 const CLOUD={busy:false,last:0};
 let cloudApplying=false,cloudTimer=null;
 async function jfetch(url,opt,ms){
@@ -2845,7 +2891,7 @@ state.updatedAt=rem.updatedAt||Date.now();
 try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
 cloudApplying=false;
 selected.clear();FC.dirty=true;
-renderVaults();renderWords();renderHome();bestChip();
+renderVaults();renderWords();renderHome();bestChip();bfRenderAI();
 if(currentView==="set")setView("set");
 }
 async function cloudCreate(){
@@ -2888,7 +2934,7 @@ else{await cloudPush();if(manual)toast("Cloud is up to date.","ok");}
 CLOUD.last=Date.now();renderAcct();
 }catch(e){if(manual)toast("Sync failed — check your connection.","err");}
 }
-/* ---------- ADD TO LIBRARY (link → library, no copy step) ---------- */
+/* ---------- add to library ---------- */
 function setSig(name,ws){
 return String(name||"").trim().toLowerCase()+"|"+ws.map(w=>String(w.word||"").toLowerCase()).sort().join(",");
 }
@@ -2911,7 +2957,6 @@ known:!!w.known
 });
 return out;
 }
-/* Adds the set straight into the Library and lands there — no copy dialog, no set page. */
 function addToLibrary(j){
 if(!j||!Array.isArray(j.words)||!j.words.length)throw new Error("bad");
 const ws=normalizeSharedWords(j.words);
@@ -3249,146 +3294,295 @@ sqg.addEventListener("pointermove",e=>{if(!SQ.drag)return;const el=document.elem
 sqg.addEventListener("pointerup",()=>SQ.up());
 sqg.addEventListener("pointercancel",()=>SQ.up());
 })();
-/* ---------- SOLITAIRE (9/10) ---------- */
-const SOL={stock:[],waste:[],fd:[[],[],[],[]],tab:[],sel:null,score:0,moves:0,secs:0,timer:null,hist:[],won:false,on:false,lastKey:"",lastAt:0,
-SU:["♠","♥","♦","♣"],RK:["","A","2","3","4","5","6","7","8","9","10","J","Q","K"],
-red(s){return s==="♥"||s==="♦";},
+/* ---------- SOLITAIRE — WORD CHAIN (9/10) ---------- */
+const SOL_COMMON=new Set(FALLBACK);
+const SOL={on:false,over:false,chain:[],used:new Set(),found:new Set(),need:"",score:0,lives:3,hints:3,time:0,limit:20,timer:null,min:3,idx:null,idxSize:0,session:0,
 setup(){this.pause();$("sol-active").classList.add("hide");$("sol-over").classList.add("hide");$("sol-setup").classList.remove("hide");},
-start(){const deck=[];for(const s of this.SU)for(let r=1;r<=13;r++)deck.push({s,r,up:false});
-const d=shuffle(deck);this.tab=[];
-for(let i=0;i<7;i++){const p=[];for(let j=0;j<=i;j++){const c=d.pop();c.up=j===i;p.push(c);}this.tab.push(p);}
-this.stock=d;this.waste=[];this.fd=[[],[],[],[]];this.sel=null;this.score=0;this.moves=0;this.secs=0;this.hist=[];this.won=false;this.on=true;
+buildIdx(){
+if(this.idx&&this.idxSize===Dict.set.size)return;
+this.idx={};this.idxSize=Dict.set.size;
+Dict.set.forEach(w=>{if(w.length>=3&&w.length<=12){const l=w[0];(this.idx[l]=this.idx[l]||[]).push(w);}});
+},
+options(l){return (this.idx[l]||[]).filter(w=>w.length>=this.min&&!this.used.has(w));},
+start(){
+this.session++;this.buildIdx();
+this.min=+document.querySelector('input[name="sol-min"]:checked').value;
+this.on=true;this.over=false;this.chain=[];this.used.clear();this.found.clear();this.score=0;this.lives=3;this.hints=3;
+const cnt={};for(const l in this.idx)cnt[l]=this.idx[l].filter(w=>w.length>=this.min).length;
+const re=new RegExp("^[A-Z]{"+this.min+",12}$");
+const vw=words().map(w=>w.word.toUpperCase()).filter(w=>re.test(w)&&Dict.set.has(w)&&cnt[w[w.length-1]]>0);
+const pool=vw.length?vw:FALLBACK.filter(w=>w.length>=Math.max(4,this.min)&&w.length<=9&&cnt[w[w.length-1]]>0);
+const first=pool[rand(pool.length)]||"APPLE";
+this.chain.push(first);this.used.add(first);this.found.add(first.toLowerCase());this.need=first[first.length-1];
 $("sol-setup").classList.add("hide");$("sol-active").classList.remove("hide");$("sol-over").classList.add("hide");
-this.render();this.resume();},
+$("sol-input").value="";$("sol-msg").textContent="";$("sol-hint-box").classList.add("hide");
+this.render();renderFound("sol",this.found);this.resetTimer();$("sol-input").focus();
+},
+tick(){this.time--;this.clock();if(this.time<=0)this.timeout();},
+resetTimer(){
+this.pause();
+this.limit=Math.max(8,22-Math.floor(this.chain.length/3));
+this.time=this.limit;this.clock();
+this.timer=setInterval(()=>this.tick(),1000);
+},
+clock(){
+$("sol-time").textContent=this.time+"s";
+$("sol-timerbar").style.width=Math.max(0,this.time/this.limit*100)+"%";
+$("sol-timerbar").style.background=this.time<=5?"linear-gradient(90deg,#f43f5e,#be123c)":"linear-gradient(90deg,#22c55e,#15803d)";
+},
+timeout(){
+this.lives--;Sfx.err();
+if(this.lives<=0){this.gameOver(false);return;}
+toast("Time's up! −1 heart.","err");
+this.render();this.resetTimer();
+},
 pause(){clearInterval(this.timer);this.timer=null;},
-resume(){if(!this.on||this.won||this.timer)return;this.timer=setInterval(()=>{this.secs++;$("sol-time").textContent=this.clock();},1000);},
-clock(){const m=Math.floor(this.secs/60),s=this.secs%60;return m+":"+(s<10?"0":"")+s;},
-snap(){this.hist.push(JSON.stringify({stock:this.stock,waste:this.waste,fd:this.fd,tab:this.tab,score:this.score,moves:this.moves}));if(this.hist.length>200)this.hist.shift();},
-undo(){const h=this.hist.pop();if(!h){toast("Nothing to undo.");return;}Object.assign(this,JSON.parse(h));this.sel=null;this.render();Sfx.tap();},
-draw(){if(!this.stock.length&&!this.waste.length)return;this.snap();this.sel=null;
-if(this.stock.length){const c=this.stock.pop();c.up=true;this.waste.push(c);}
-else{this.stock=this.waste.reverse().map(c=>({s:c.s,r:c.r,up:false}));this.waste=[];}
-this.moves++;this.render();Sfx.tap();},
-pile(loc){if(loc==="w")return this.waste;if(loc[0]==="f")return this.fd[+loc[1]];if(loc[0]==="t")return this.tab[+loc[1]];return null;},
-runOk(p,i){if(!p[i].up)return false;for(let k=i;k<p.length-1;k++){const a=p[k],b=p[k+1];if(!b.up||a.r!==b.r+1||this.red(a.s)===this.red(b.s))return false;}return true;},
-canTab(c,p){if(!p.length)return c.r===13;const t=p[p.length-1];return t.up&&t.r===c.r+1&&this.red(t.s)!==this.red(c.s);},
-canFd(c,p){const t=p[p.length-1];return p.length?(t.s===c.s&&c.r===t.r+1):c.r===1;},
-tap(loc,i){if(this.won||!this.on)return;
-if(loc==="s"){this.draw();this.lastKey="";return;}
-const key=loc+":"+i,now=Date.now(),dbl=this.lastKey===key&&now-this.lastAt<380;
-this.lastKey=key;this.lastAt=now;
-const p=this.pile(loc);if(!p)return;
-if(dbl&&i===p.length-1&&p[i]&&p[i].up&&loc!=="f"){this.toFd(loc);return;}
-if(this.sel){
-const s=this.sel,sp=this.pile(s.loc);
-if(s.loc===loc){this.sel=null;this.render();return;}
-const moving=sp.slice(s.i);
-if(loc[0]==="t"&&this.canTab(moving[0],p))this.move(s,loc,moving);
-else if(loc[0]==="f"&&moving.length===1&&this.canFd(moving[0],p))this.move(s,loc,moving);
-else{Sfx.err();toast("That move isn't allowed.","err");}
-return;}
-if(!p.length)return;
-if(loc==="w"&&i!==p.length-1)return;
-if(loc[0]==="t"){
-if(!p[i].up){if(i===p.length-1){this.snap();p[i].up=true;this.score+=5;this.moves++;Sfx.tap();this.render();}return;}
-if(!this.runOk(p,i)){toast("Only ordered, alternating runs can move.","err");return;}}
-this.sel={loc,i};Sfx.tap();this.render();},
-move(s,dest,moving){this.snap();const sp=this.pile(s.loc);sp.splice(s.i,moving.length);
-const dp=this.pile(dest);moving.forEach(c=>dp.push(c));
-if(s.loc[0]==="t"&&sp.length&&!sp[sp.length-1].up){sp[sp.length-1].up=true;this.score+=5;}
-if(dest[0]==="f")this.score+=10;else if(s.loc==="w")this.score+=5;
-this.moves++;this.sel=null;Sfx.place();this.render();this.winCheck();},
-toFd(loc){const p=this.pile(loc);if(!p.length)return;const c=p[p.length-1];
-for(let f=0;f<4;f++)if(this.canFd(c,this.fd[f])){this.move({loc,i:p.length-1},"f"+f,[c]);return;}
-toast("No foundation takes that card yet.");},
-auto(){if(this.stock.length||this.waste.length||this.tab.some(p=>p.some(c=>!c.up))){toast("Auto-finish needs an empty stock and all cards face-up.");return;}
-this.snap();
-const step=()=>{let did=false;
-for(let t=0;t<7&&!did;t++){const p=this.tab[t];if(!p.length)continue;const c=p[p.length-1];
-for(let f=0;f<4;f++)if(this.canFd(c,this.fd[f])){p.pop();this.fd[f].push(c);this.score+=10;this.moves++;did=true;break;}}
-this.render();
-if(this.fd.reduce((a,p)=>a+p.length,0)===52){this.winCheck();return;}
-if(did)setTimeout(step,110);};
-step();},
-winCheck(){if(this.fd.reduce((a,p)=>a+p.length,0)!==52)return;this.won=true;this.pause();
+resume(){if(this.on&&!this.over&&!this.timer)this.timer=setInterval(()=>this.tick(),1000);},
+hint(){
+if(!this.on||this.over)return;
+if(this.hints<1){toast("No hints left this run.","err");return;}
+const opts=this.options(this.need);
+if(!opts.length){this.gameOver(true);return;}
+this.hints--;this.score=Math.max(0,this.score-5);
+const common=opts.filter(w=>SOL_COMMON.has(w));
+const src=common.length?common:opts;
+const w=src[rand(src.length)];
+$("sol-hint-box").innerHTML='<b><i class="fa-solid fa-lightbulb"></i> Try:</b> <span class="mono bold">'+esc(w.toLowerCase())+"</span> <span class='dim'>("+w.length+" letters · −5 pts)</span>";
+$("sol-hint-box").classList.remove("hide");
+this.render();Sfx.tap();
+},
+submit(){
+if(!this.on||this.over)return;
+const w=$("sol-input").value.trim().toUpperCase().replace(/[^A-Z]/g,"");
+const msg=$("sol-msg");
+if(!w)return;
+if(w.length<this.min){msg.textContent="Words need "+this.min+"+ letters.";Sfx.err();return;}
+if(w[0]!==this.need){msg.textContent="Must start with “"+this.need.toLowerCase()+"” — the last letter of “"+this.chain[this.chain.length-1].toLowerCase()+"”.";Sfx.err();return;}
+if(this.used.has(w)){msg.textContent="Already used in this chain — no repeats!";Sfx.err();return;}
+if(!Dict.set.has(w)){msg.textContent="“"+w.toLowerCase()+"” is not in the dictionary.";Sfx.err();return;}
+const pts=w.length*2+Math.max(0,this.time)+(w.length>=8?10:0);
+this.score+=pts;this.chain.push(w);this.used.add(w);this.found.add(w.toLowerCase());
+this.need=w[w.length-1];
+$("sol-input").value="";msg.textContent="";$("sol-hint-box").classList.add("hide");
+Sfx.clear();toast('“'+w.toLowerCase()+'” +'+pts,"ok");
 if(this.score>state.best.solitaire){state.best.solitaire=this.score;save();bestChip();}
-$("sol-final").textContent=this.score;$("sol-final-time").textContent=this.clock();$("sol-over").classList.remove("hide");Sfx.win();},
-card(c,loc,i,sel){if(!c.up)return '<div class="pcard back" data-action="sol-tap" data-loc="'+loc+'" data-i="'+i+'"></div>';
-return '<div class="pcard up'+(this.red(c.s)?" red":"")+(sel?" sel":"")+'" data-action="sol-tap" data-loc="'+loc+'" data-i="'+i+'"><span>'+this.RK[c.r]+c.s+"</span><i>"+c.s+"</i></div>";},
-render(){$("sol-score").textContent=this.score;$("sol-moves").textContent=this.moves;$("sol-time").textContent=this.clock();
-const sel=this.sel;
-$("sol-stock").innerHTML=this.stock.length?'<div class="pcard back" data-action="sol-tap" data-loc="s" data-i="0"></div>':'<div class="pcard empty" data-action="sol-tap" data-loc="s" data-i="0">↻</div>';
-$("sol-waste").innerHTML=this.waste.length?this.card(this.waste[this.waste.length-1],"w",this.waste.length-1,!!(sel&&sel.loc==="w")):'<div class="pcard empty"></div>';
-$("sol-fd").innerHTML=this.fd.map((p,f)=>p.length?this.card(p[p.length-1],"f"+f,p.length-1,false):'<div class="pcard empty" data-action="sol-tap" data-loc="f'+f+'" data-i="0">A</div>').join("");
-$("sol-tab").innerHTML=this.tab.map((p,t)=>'<div class="sol-col" data-action="sol-tap" data-loc="t'+t+'" data-i="'+Math.max(0,p.length-1)+'">'+p.map((c,i)=>'<div style="margin-top:'+(i?"calc(var(--ch)*-.72)":"0")+'">'+this.card(c,"t"+t,i,!!(sel&&sel.loc==="t"+t&&i>=sel.i))+"</div>").join("")+"</div>").join("");}
+this.render();renderFound("sol",this.found);
+if(!this.options(this.need).length){this.gameOver(true);return;}
+this.resetTimer();$("sol-input").focus();
+},
+render(){
+$("sol-score").textContent=this.score;
+$("sol-chain-count").textContent=this.chain.length;
+$("sol-need").textContent=this.need.toLowerCase();
+$("sol-lives").innerHTML="♥".repeat(this.lives)+'<span style="opacity:.25">'+"♥".repeat(Math.max(0,3-this.lives))+"</span>";
+$("sol-hints").textContent=this.hints;
+$("sol-input").placeholder="a word starting with “"+this.need.toLowerCase()+"”…";
+const row=$("sol-chain-row");
+row.innerHTML=this.chain.map((w,i)=>(i?'<span class="sol-arrow">→</span>':"")+'<button class="found-chip'+(i===this.chain.length-1?" on":"")+'" data-action="open-word" data-word="'+esc(w.toLowerCase())+'">'+esc(w.toLowerCase())+"</button>").join("");
+row.scrollLeft=row.scrollWidth;
+},
+gameOver(cleared){
+this.over=true;this.pause();
+if(cleared){this.score+=50;if(this.score>state.best.solitaire){state.best.solitaire=this.score;save();bestChip();}Sfx.win();}
+else Sfx.lose();
+$("sol-over-title").textContent=cleared?"Dead end — chain complete!":"Out of hearts!";
+$("sol-over-msg").textContent=cleared?"No unused word starts with “"+this.need.toLowerCase()+"”. +50 completion bonus!":"The clock beat you three times.";
+$("sol-final").textContent=this.score;
+$("sol-final-chain").textContent=this.chain.length;
+const longest=this.chain.slice().sort((a,b)=>b.length-a.length)[0]||"—";
+$("sol-final-long").textContent=longest.toLowerCase();
+$("sol-over").classList.remove("hide");
+}
 };
-/* ---------- WORD BOSS 3D (10/10) ---------- */
+$("sol-form").addEventListener("submit",e=>{e.preventDefault();SOL.submit();});
+/* ---------- WORD BOSS 3D (10/10) — skill-based AI ---------- */
 const BF_PTS={A:1,E:1,I:1,O:1,U:1,L:1,N:1,S:1,T:1,R:1,D:1,G:1,B:2,C:2,M:2,P:2,F:2,H:2,V:2,W:2,Y:2,K:4,J:4,X:4,Q:6,Z:6};
+const BF_TIERS=[
+{id:"easy",name:"Easy",col:"#22c55e",cd:2.7,spd:.78,tele:1.25,dens:.7,dmg:6,skills:["bolt","fan"]},
+{id:"medium",name:"Medium",col:"#4d7dff",cd:2.2,spd:.92,tele:1.05,dens:.85,dmg:8,skills:["bolt","fan","ring"]},
+{id:"hard",name:"Hard",col:"#f5a524",cd:1.8,spd:1.05,tele:.9,dens:1,dmg:10,skills:["bolt","fan","ring","rain"]},
+{id:"insane",name:"Insane",col:"#ec4899",cd:1.45,spd:1.18,tele:.75,dens:1.15,dmg:12,skills:["bolt","fan","ring","rain","beam"]},
+{id:"edemon",name:"Easy Demon",col:"#8b5cf6",cd:1.15,spd:1.32,tele:.62,dens:1.3,dmg:14,skills:["bolt","fan","ring","rain","beam","spiral"]},
+{id:"hdemon",name:"Hard Demon",col:"#f43f5e",cd:.92,spd:1.48,tele:.5,dens:1.5,dmg:16,skills:["bolt","fan","ring","rain","beam","spiral","wall","homing"]},
+{id:"xdemon",name:"Extreme Demon",col:"#ff1f4b",cd:.72,spd:1.66,tele:.38,dens:1.8,dmg:18,skills:["bolt","fan","ring","rain","beam","spiral","wall","homing","slam","cross"]}
+];
+const BF_SKILL={bolt:"Aimed Bolt",fan:"Spread Fan",ring:"Radial Burst",rain:"Sky Rain",beam:"Sweep Laser",spiral:"Spiral Storm",wall:"Bullet Wall",homing:"Hunter Orbs",slam:"Ground Slam",cross:"Cross Lasers"};
+function bfTier(id){return BF_TIERS.find(t=>t.id===id)||BF_TIERS[1];}
+function bfRenderAI(){
+const t=bfTier(state.bfcfg.ai);
+document.querySelectorAll(".bf-ai-btn").forEach(b=>{
+const k=bfTier(b.dataset.ai),on=k.id===t.id;
+b.classList.toggle("on",on);
+b.style.color=on?k.col:"";b.style.borderColor=on?k.col:"";b.style.background=on?k.col+"22":"";
+});
+const d=$("bf-ai-desc");
+if(d)d.innerHTML='<b style="color:'+t.col+'">'+esc(t.name)+'</b> · '+t.skills.length+' skills · attack rate ×'+(1/t.cd).toFixed(2)+' · bullet speed ×'+t.spd.toFixed(2)+' · warning '+t.tele.toFixed(2)+'s<br><span class="dim">'+t.skills.map(k=>BF_SKILL[k]).join(" · ")+"</span>";
+const s=$("bf-ai2");if(s)s.value=t.id;
+const c=$("bf-tier");if(c){c.textContent=t.name;c.style.color=t.col;c.style.borderColor=t.col;}
+}
 const BF={on:false,paused:false,over:false,typing:false,level:1,score:0,dmgTotal:0,used:new Set(),found:new Set(),heals:1,hp:100,bhp:0,bmax:1,
-T:null,scene:null,cam:null,ren:null,boss:null,ring:null,projs:[],shots:[],orbs:[],parts:[],nova:null,
-yaw:0,pitch:0,px:0,pz:12,keys:{},slideT:0,slideCd:0,novaCd:0,inv:0,fireT:2,orbT:8,raf:0,last:0,mobile:false,joy:null,look:null,hitFlash:0,loader:null,
+T:null,scene:null,cam:null,ren:null,boss:null,ring:null,core:null,G:null,M:null,
+projs:[],shots:[],orbs:[],parts:[],beams:[],waves:[],marks:[],casts:[],nova:null,
+yaw:0,pitch:0,px:0,pz:12,keys:{},slideT:0,slideCd:0,novaCd:0,inv:0,fireT:2,orbT:8,typeT:0,raf:0,last:0,mobile:false,joy:null,look:null,hitFlash:0,shake:0,lastSkill:"",loader:null,
 load(){if(window.THREE)return Promise.resolve();
 this.loader=this.loader||new Promise((res,rej)=>{const s=document.createElement("script");
 s.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
 s.onload=()=>res();s.onerror=()=>{this.loader=null;rej(new Error("3D engine failed to load"));};
 document.head.appendChild(s);});
 return this.loader;},
-setup(){this.pause(true);$("bf-active").classList.add("hide");$("bf-setup").classList.remove("hide");},
+tier(){return bfTier(state.bfcfg.ai);},
+setup(){this.pause(true);$("bf-active").classList.add("hide");$("bf-setup").classList.remove("hide");bfRenderAI();},
 async start(){
 try{await this.load();}catch(e){toast("Couldn't load the 3D engine — check your connection.","err");return;}
 this.mobile=matchMedia("(pointer:coarse)").matches;
 this.on=true;this.paused=false;this.over=false;this.typing=false;
 this.level=1;this.score=0;this.dmgTotal=0;this.used.clear();this.found.clear();this.heals=1;this.hp=100;
-this.px=0;this.pz=12;this.yaw=0;this.pitch=0;this.keys={};this.slideT=0;this.slideCd=0;this.novaCd=0;this.inv=0;this.orbT=8;this.joy=null;this.look=null;this.hitFlash=0;
+this.px=0;this.pz=12;this.yaw=0;this.pitch=0;this.keys={};this.slideT=0;this.slideCd=0;this.novaCd=0;this.inv=0;this.orbT=8;this.typeT=0;this.joy=null;this.look=null;this.hitFlash=0;this.shake=0;this.lastSkill="";
 this.initScene();this.spawnBoss();
 $("bf-setup").classList.add("hide");$("bf-active").classList.remove("hide");
 $("bf-over").classList.add("hide");$("bf-paused").classList.add("hide");$("bf-clear").classList.add("hide");$("bf-type").classList.add("hide");
 $("bf-touch").classList.toggle("hide",!this.mobile);
-$("bf-hintline").textContent=this.mobile?"Left half: move · drag right half: look · use the buttons below":"Click the arena to lock the mouse · "+this.atkLabel()+" opens the word box · P pauses";
-this.resize();renderFound("bf",this.found);this.hud();
+$("bf-hintline").textContent=this.mobile?"Left half: move · drag right half: look · buttons below · the fight pauses while you type":"Click arena to lock mouse · "+this.atkLabel()+" opens the word box · WHILE TYPING: arrow keys dodge, Shift slides · P pauses";
+bfRenderAI();this.resize();renderFound("bf",this.found);this.hud();
 this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));},
 atkLabel(){const a=state.bfcfg.atk;return a==="m1"?"M1 (left click)":a==="m2"?"M2 (right click)":a.toUpperCase();},
 initScene(){const T=window.THREE;this.T=T;
 if(this.ren){this.clearField();return;}
-this.scene=new T.Scene();this.scene.background=new T.Color(0x070b16);this.scene.fog=new T.Fog(0x070b16,30,90);
-this.cam=new T.PerspectiveCamera(72,1,.1,200);
+this.scene=new T.Scene();this.scene.background=new T.Color(0x070b16);this.scene.fog=new T.Fog(0x070b16,34,96);
+this.cam=new T.PerspectiveCamera(72,1,.1,220);
 this.ren=new T.WebGLRenderer({antialias:true});this.ren.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
 $("bf-stage").appendChild(this.ren.domElement);
 this.scene.add(new T.AmbientLight(0x8899ff,.75));
-const pl=new T.PointLight(0x8b5cf6,1.1,120);pl.position.set(0,14,0);this.scene.add(pl);
+const pl=new T.PointLight(0x8b5cf6,1.1,130);pl.position.set(0,15,0);this.scene.add(pl);
 const floor=new T.Mesh(new T.CircleGeometry(40,48),new T.MeshStandardMaterial({color:0x0d1529,roughness:1}));
 floor.rotation.x=-Math.PI/2;this.scene.add(floor);
 this.scene.add(new T.GridHelper(80,40,0x2a3a7a,0x16204a));
+this.G={bul:new T.SphereGeometry(.32,8,8),big:new T.SphereGeometry(.55,10,10),box:new T.BoxGeometry(1,1,1),wave:new T.TorusGeometry(1,.13,6,44),mark:new T.RingGeometry(.62,1,22)};
+this.M={bul:new T.MeshBasicMaterial({color:0xff3b5c}),hom:new T.MeshBasicMaterial({color:0xff4fd8}),rain:new T.MeshBasicMaterial({color:0xffb020}),
+shot:new T.MeshBasicMaterial({color:0x22d3ee}),orb:new T.MeshBasicMaterial({color:0x22c55e}),part:new T.MeshBasicMaterial({color:0xc4b5fd}),
+beam:new T.MeshBasicMaterial({color:0xff2d55,transparent:true,opacity:.8}),tele:new T.MeshBasicMaterial({color:0xff2d55,transparent:true,opacity:.2}),
+wave:new T.MeshBasicMaterial({color:0xffa020,transparent:true,opacity:.85}),mark:new T.MeshBasicMaterial({color:0xffb020,transparent:true,opacity:.5,side:T.DoubleSide}),
+nova:new T.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:1})};
 this.boss=new T.Group();
-const core=new T.Mesh(new T.IcosahedronGeometry(2.3,1),new T.MeshStandardMaterial({color:0x8b5cf6,emissive:0x4c1d95,flatShading:true}));
+this.core=new T.Mesh(new T.IcosahedronGeometry(2.3,1),new T.MeshStandardMaterial({color:0x8b5cf6,emissive:0x4c1d95,flatShading:true}));
 this.ring=new T.Mesh(new T.TorusGeometry(3.6,.16,8,42),new T.MeshStandardMaterial({color:0xec4899,emissive:0x9d174d}));
 this.ring.rotation.x=Math.PI/2.4;
 const eyeM=new T.MeshStandardMaterial({color:0xffffff,emissive:0xff3355});
 const e1=new T.Mesh(new T.SphereGeometry(.34,10,10),eyeM);e1.position.set(-.8,.5,2.1);
 const e2=e1.clone();e2.position.x=.8;
-this.boss.add(core);this.boss.add(this.ring);this.boss.add(e1);this.boss.add(e2);
+this.boss.add(this.core);this.boss.add(this.ring);this.boss.add(e1);this.boss.add(e2);
 this.scene.add(this.boss);},
-clearField(){[...this.projs,...this.shots,...this.orbs,...this.parts].forEach(o=>this.scene.remove(o.m));
-this.projs=[];this.shots=[];this.orbs=[];this.parts=[];
+clearField(){
+this.projs.concat(this.shots,this.orbs,this.parts,this.beams,this.waves,this.marks).forEach(o=>{if(o.m)this.scene.remove(o.m);});
+this.projs=[];this.shots=[];this.orbs=[];this.parts=[];this.beams=[];this.waves=[];this.marks=[];this.casts=[];
 if(this.nova){this.scene.remove(this.nova.m);this.nova=null;}},
 spawnBoss(){this.bmax=Math.round(this.level*this.level*(this.mobile?50:100));this.bhp=this.bmax;
 this.boss.position.set(0,4,-12);const s=1+Math.min(1.2,this.level*.05);this.boss.scale.set(s,s,s);
-this.fireT=1.6;this.clearField();this.hud();},
+this.fireT=1.5;this.typeT=0;this.clearField();this.hud();},
 resize(){if(!this.ren)return;const st=$("bf-stage"),w=st.clientWidth||600,h=st.clientHeight||420;
 this.ren.setSize(w,h);this.cam.aspect=w/h;this.cam.updateProjectionMatrix();},
 loop(now){if(!this.on||this.paused||this.over)return;
-const dt=Math.min(.05,(now-this.last)/1000)*(this.typing?0.25:1);this.last=now;
-this.update(dt,now/1000);this.ren.render(this.scene,this.cam);
+const ts=this.typing?(this.mobile?0:0.6):1;
+const dt=Math.min(.05,(now-this.last)/1000)*ts;this.last=now;
+if(dt>0)this.update(dt,now/1000);
+this.ren.render(this.scene,this.cam);
 this.raf=requestAnimationFrame(t=>this.loop(t));},
-update(dt,t){const T=this.T;
+bullet(x,y,z,vx,vy,vz,o){
+if(this.projs.length>300)return;
+o=o||{};const T=this.T,m=new T.Mesh(o.big?this.G.big:this.G.bul,o.mat||this.M.bul);
+m.position.set(x,y,z);this.scene.add(m);
+this.projs.push({m,v:new T.Vector3(vx,vy,vz),life:o.life||7,r:o.big?0.55:0.32,dmg:o.dmg||8,hom:!!o.hom,sp:o.sp||6,rain:!!o.rain});},
+aimShot(a,speed,dmg,off){
+const bp=this.boss.position,ang=a+(off||0);
+const tx=this.px-bp.x,tz=this.pz-bp.z,tl=Math.hypot(tx,tz)||1;
+const vy=(1.4-bp.y)/tl*speed;
+this.bullet(bp.x,bp.y-.8,bp.z,Math.sin(ang)*speed,vy,Math.cos(ang)*speed,{dmg:dmg});},
+addTele(m,tele,fn){this.marks.push({m,t:0,tele,fn,sc:1,pulse:false});},
+addMark(x,z,tele,fn,sc){
+const T=this.T,m=new T.Mesh(this.G.mark,this.M.mark);
+m.rotation.x=-Math.PI/2;m.position.set(x,.07,z);m.scale.set(sc,sc,sc);this.scene.add(m);
+this.marks.push({m,t:0,tele,fn,sc,pulse:true});},
+addBeam(a,sw,dur,tele,w,dmg){
+const T=this.T,m=new T.Mesh(this.G.box,this.M.tele);
+m.scale.set(w,2.3,44);this.scene.add(m);
+this.beams.push({m,a,sw,t:0,tele,dur,w,len:44,dmg,active:false});},
+addWave(x,z,sp,max,dmg){
+const T=this.T,m=new T.Mesh(this.G.wave,this.M.wave);
+m.rotation.x=-Math.PI/2;m.position.set(x,.35,z);m.scale.set(.5,.5,.5);this.scene.add(m);
+this.waves.push({m,x,z,r:.5,sp,max,dmg,hit:false});},
+announce(txt,col){
+const el=document.createElement("div");el.className="bf-float bf-cast";el.style.color=col||"#ffd48a";el.textContent=txt;
+$("bf-floats").appendChild(el);setTimeout(()=>el.remove(),1250);},
+hurt(d){
+if(this.inv>0||this.over||!this.on)return;
+this.hp-=d;this.inv=.62;this.hitFlash=.5;this.shake=.55;Sfx.err();
+if(this.hp<=0)this.die();},
+cast(kind){
+const T=this.T,ti=this.tier(),bp=this.boss.position,d=ti.dens,sp=ti.spd,dmg=ti.dmg;
+const aim=Math.atan2(this.px-bp.x,this.pz-bp.z);
+this.lastSkill=kind;this.announce(BF_SKILL[kind]||kind,ti.col);Sfx.cast();
+if(kind==="bolt"){
+const n=d>=1.5?3:d>=1?2:1;
+for(let i=0;i<n;i++)this.casts.push({t:0,dur:i*.15,acc:0,every:0,fn:()=>this.aimShot(aim,12*sp,dmg)});
+}else if(kind==="fan"){
+const n=Math.round(5*d)+2,arc=.95;
+for(let i=0;i<n;i++)this.aimShot(aim,9.5*sp,dmg*.85,(i/(n-1)-.5)*arc);
+if(d>=1.3)this.casts.push({t:0,dur:.5,acc:0,every:0,fn:()=>{for(let i=0;i<n;i++)this.aimShot(aim,9.5*sp,dmg*.85,(i/(n-1)-.5)*arc+.16);}});
+}else if(kind==="ring"){
+const n=Math.round(13*d),ph=Math.random()*6.283;
+for(let i=0;i<n;i++){const a=ph+i/n*6.283;this.bullet(bp.x,1.4,bp.z,Math.sin(a)*8*sp,0,Math.cos(a)*8*sp,{dmg:dmg*.8});}
+if(d>=1.15)this.casts.push({t:0,dur:.55,acc:0,every:0,fn:()=>{for(let i=0;i<n;i++){const a=ph+(i+.5)/n*6.283;this.bullet(bp.x,1.4,bp.z,Math.sin(a)*8*sp,0,Math.cos(a)*8*sp,{dmg:dmg*.8});}}});
+}else if(kind==="rain"){
+const k=Math.round(6*d);
+for(let i=0;i<k;i++){
+const x=this.px+(Math.random()-.5)*16,z=this.pz+(Math.random()-.5)*16;
+this.addMark(x,z,ti.tele,()=>{this.bullet(x,15,z,0,-17*sp,0,{dmg:dmg*.9,mat:this.M.rain,big:true,rain:true,life:3});},1.5);
+}
+}else if(kind==="beam"){
+this.addBeam(aim-.7,.62,1.9,ti.tele,2.2,dmg);
+}else if(kind==="cross"){
+for(let i=0;i<4;i++)this.addBeam(aim+i*Math.PI/2,.42,2.4,ti.tele,1.9,dmg*.9);
+}else if(kind==="spiral"){
+const arms=2+Math.round(d);
+this.casts.push({t:0,dur:2.3,acc:0,every:.085,a:Math.random()*6.283,fn:c=>{
+for(let i=0;i<arms;i++){const a=c.a+i*6.283/arms;this.bullet(bp.x,1.4,bp.z,Math.sin(a)*7.5*sp,0,Math.cos(a)*7.5*sp,{dmg:dmg*.7});}
+c.a+=.36;}});
+}else if(kind==="wall"){
+const dx=Math.sin(aim),dz=Math.cos(aim),pvx=Math.cos(aim),pvz=-Math.sin(aim);
+const bx=this.px-dx*32,bz=this.pz-dz*32;
+const tm=new T.Mesh(this.G.box,this.M.tele);tm.scale.set(64,2.4,.7);tm.position.set(bx,1.3,bz);tm.rotation.y=aim+Math.PI/2;this.scene.add(tm);
+const gaps=[(Math.random()-.5)*22];if(d<1.2)gaps.push((Math.random()-.5)*22);
+this.addTele(tm,ti.tele,()=>{
+for(let s=-30;s<=30;s+=2.3){
+if(gaps.some(g=>Math.abs(s-g)<2.8))continue;
+this.bullet(bx+pvx*s,1.4,bz+pvz*s,dx*9*sp,0,dz*9*sp,{dmg:dmg*.85,life:9});
+}});
+}else if(kind==="homing"){
+const n=2+Math.round(d);
+for(let i=0;i<n;i++){const a=Math.random()*6.283;
+this.bullet(bp.x+Math.sin(a)*3,1.6,bp.z+Math.cos(a)*3,Math.sin(a)*3,0,Math.cos(a)*3,{dmg:dmg*.8,mat:this.M.hom,big:true,hom:true,sp:5.2*sp,life:6});}
+}else if(kind==="slam"){
+const x=bp.x,z=bp.z;
+this.addMark(x,z,ti.tele,()=>{
+for(let i=0;i<3;i++)this.casts.push({t:0,dur:i*.3,acc:0,every:0,fn:()=>this.addWave(x,z,13*sp,42,dmg)});
+},5);
+}
+},
+update(dt,t){
+const T=this.T,ti=this.tier();
 let mx=0,mz=0;
-if(this.keys.w)mz-=1;if(this.keys.s)mz+=1;if(this.keys.a)mx-=1;if(this.keys.d)mx+=1;
+if(this.keys.w||this.keys.arrowup)mz-=1;
+if(this.keys.s||this.keys.arrowdown)mz+=1;
+if(this.keys.a||this.keys.arrowleft)mx-=1;
+if(this.keys.d||this.keys.arrowright)mx+=1;
 if(this.joy){mx+=this.joy.dx;mz+=this.joy.dy;}
 const len=Math.hypot(mx,mz);if(len>1){mx/=len;mz/=len;}
 const sp=8*(this.slideT>0?3.2:1),sy=Math.sin(this.yaw),cy=Math.cos(this.yaw);
 this.px+=(mx*cy+mz*sy)*sp*dt;this.pz+=(mz*cy-mx*sy)*sp*dt;
 const rr=Math.hypot(this.px,this.pz);if(rr>38){this.px*=38/rr;this.pz*=38/rr;}
-this.cam.position.set(this.px,1.7,this.pz);this.cam.rotation.order="YXZ";this.cam.rotation.y=this.yaw;this.cam.rotation.x=this.pitch;
+this.cam.position.set(this.px,1.7,this.pz);
+this.cam.rotation.order="YXZ";this.cam.rotation.y=this.yaw;this.cam.rotation.x=this.pitch;
+if(this.shake>0){const s=this.shake*.5;this.cam.position.x+=(Math.random()-.5)*s;this.cam.position.y+=(Math.random()-.5)*s;this.shake=Math.max(0,this.shake-dt*1.8);}
 this.slideT=Math.max(0,this.slideT-dt);this.slideCd=Math.max(0,this.slideCd-dt);this.novaCd=Math.max(0,this.novaCd-dt);this.inv=Math.max(0,this.inv-dt);
 const bp=this.boss.position;bp.y=4+Math.sin(t*1.3)*.6;this.ring.rotation.z+=dt*.8;this.boss.rotation.y+=dt*.4;
 const dxp=this.px-bp.x,dzp=this.pz-bp.z,dd=Math.hypot(dxp,dzp)||1;
@@ -3396,37 +3590,84 @@ if(dd>13){bp.x+=dxp/dd*dt*2.2;bp.z+=dzp/dd*dt*2.2;}
 else if(dd<9){bp.x-=dxp/dd*dt*1.6;bp.z-=dzp/dd*dt*1.6;}
 bp.x+=Math.sin(t*.5)*dt*2;
 this.fireT-=dt;
-if(this.fireT<=0){this.fireT=Math.max(.8,2.3-this.level*.09);
-const m=new T.Mesh(new T.SphereGeometry(.35,8,8),new T.MeshStandardMaterial({color:0xf43f5e,emissive:0xbe123c}));
-m.position.copy(bp);
-const v=new T.Vector3(this.px-bp.x,1.4-bp.y,this.pz-bp.z).normalize().multiplyScalar(9+this.level*.5);
-this.scene.add(m);this.projs.push({m,v,life:7});}
-this.projs=this.projs.filter(p=>{p.m.position.addScaledVector(p.v,dt);p.life-=dt;
-const d=Math.hypot(p.m.position.x-this.px,p.m.position.z-this.pz,p.m.position.y-1.4);
-if(d<1.1){this.scene.remove(p.m);
-if(this.inv<=0){this.hp-=Math.min(30,7+this.level);this.inv=.35;this.hitFlash=.4;Sfx.err();if(this.hp<=0)this.die();}
-return false;}
-if(p.life<=0||p.m.position.y<0){this.scene.remove(p.m);return false;}
+if(this.fireT<=0){
+const pool=ti.skills.filter(k=>k!==this.lastSkill);
+const src=pool.length?pool:ti.skills;
+this.cast(src[rand(src.length)]);
+this.fireT=Math.max(.34,ti.cd*Math.max(.6,1-this.level*.025))*(.85+Math.random()*.3);
+if(ti.dens>=1.5&&Math.random()<.45)this.casts.push({t:0,dur:.42,acc:0,every:0,fn:()=>this.cast(ti.skills[rand(ti.skills.length)])});
+}
+if(this.typing&&!this.mobile){
+this.typeT-=dt;
+if(this.typeT<=0){this.typeT=1.5;this.cast(Math.random()<.5?"bolt":"fan");}
+}
+this.casts=this.casts.filter(c=>{
+c.t+=dt;
+if(c.every){c.acc+=dt;while(c.acc>=c.every&&c.t<=c.dur){c.acc-=c.every;c.fn(c);}return c.t<c.dur;}
+if(c.t>=c.dur){c.fn(c);return false;}
 return true;});
-this.shots=this.shots.filter(s=>{const d=new T.Vector3().subVectors(bp,s.m.position),dist=d.length();
+this.projs=this.projs.filter(p=>{
+if(p.hom){
+const dx=this.px-p.m.position.x,dz=this.pz-p.m.position.z,dy=1.4-p.m.position.y,l=Math.hypot(dx,dy,dz)||1,k=Math.min(1,dt*1.5);
+p.v.x+=(dx/l*p.sp-p.v.x)*k;p.v.y+=(dy/l*p.sp-p.v.y)*k;p.v.z+=(dz/l*p.sp-p.v.z)*k;
+}
+p.m.position.addScaledVector(p.v,dt);p.life-=dt;
+const d=Math.hypot(p.m.position.x-this.px,p.m.position.z-this.pz,p.m.position.y-1.4);
+if(d<p.r+.75){this.scene.remove(p.m);this.hurt(p.dmg);return false;}
+if(p.rain&&p.m.position.y<=.35){this.scene.remove(p.m);this.addWave(p.m.position.x,p.m.position.z,13,4.5,p.dmg*.6);return false;}
+if(p.life<=0||p.m.position.y<-1||Math.hypot(p.m.position.x,p.m.position.z)>46){this.scene.remove(p.m);return false;}
+return true;});
+this.beams=this.beams.filter(b=>{
+b.t+=dt;
+if(!b.active&&b.t>=b.tele){b.active=true;b.m.material=this.M.beam;Sfx.warn();}
+if(b.active){b.a+=b.sw*dt;b.dur-=dt;}
+const dx=Math.sin(b.a),dz=Math.cos(b.a);
+b.m.position.set(bp.x+dx*b.len/2,1.25,bp.z+dz*b.len/2);b.m.rotation.y=b.a;
+if(b.active){
+const rx=this.px-bp.x,rz=this.pz-bp.z,along=rx*dx+rz*dz,perp=Math.abs(rx*dz-rz*dx);
+if(along>0&&along<b.len&&perp<b.w/2+.5)this.hurt(b.dmg);
+}
+if(b.active&&b.dur<=0){this.scene.remove(b.m);return false;}
+return true;});
+this.waves=this.waves.filter(w=>{
+w.r+=w.sp*dt;w.m.scale.set(w.r,w.r,w.r);
+const d=Math.hypot(this.px-w.x,this.pz-w.z);
+if(!w.hit&&Math.abs(d-w.r)<1.05){w.hit=true;this.hurt(w.dmg);}
+if(w.r>w.max){this.scene.remove(w.m);return false;}
+return true;});
+this.marks=this.marks.filter(k=>{
+k.t+=dt;
+if(k.pulse){const s=k.sc*(.75+.45*Math.min(1,k.t/k.tele));k.m.scale.set(s,s,s);}
+if(k.t>=k.tele){this.scene.remove(k.m);if(k.fn)k.fn();return false;}
+return true;});
+this.shots=this.shots.filter(s=>{
+const d=new T.Vector3().subVectors(bp,s.m.position),dist=d.length();
 if(dist<2.8){this.scene.remove(s.m);this.hitBoss(s.dmg);return false;}
-s.m.position.addScaledVector(d.normalize(),Math.min(dist,34*dt));return true;});
+s.m.position.addScaledVector(d.normalize(),Math.min(dist,36*dt));return true;});
 this.orbT-=dt;
-if(this.orbT<=0&&this.orbs.length<3){this.orbT=11;
-const a=Math.random()*Math.PI*2,rad=8+Math.random()*22;
-const m=new T.Mesh(new T.SphereGeometry(.5,10,10),new T.MeshStandardMaterial({color:0x22c55e,emissive:0x15803d}));
-m.position.set(Math.cos(a)*rad,1,Math.sin(a)*rad);this.scene.add(m);this.orbs.push({m});}
-this.orbs=this.orbs.filter(o=>{o.m.position.y=1+Math.sin(t*3+o.m.position.x)*.25;o.m.rotation.y+=dt;
+if(this.orbT<=0&&this.orbs.length<3){
+this.orbT=11;
+const a=Math.random()*6.283,rad=8+Math.random()*22;
+const m=new T.Mesh(this.G.big,this.M.orb);
+m.position.set(Math.cos(a)*rad,1,Math.sin(a)*rad);this.scene.add(m);this.orbs.push({m});
+}
+this.orbs=this.orbs.filter(o=>{
+o.m.position.y=1+Math.sin(t*3+o.m.position.x)*.25;o.m.rotation.y+=dt;
 if(Math.hypot(o.m.position.x-this.px,o.m.position.z-this.pz)<1.6){this.scene.remove(o.m);this.heals++;toast("Heal orb collected ✚","ok");Sfx.clear();return false;}
 return true;});
-this.parts=this.parts.filter(p=>{p.life-=dt;p.m.position.addScaledVector(p.v,dt);p.m.scale.multiplyScalar(.96);
+this.parts=this.parts.filter(p=>{
+p.life-=dt;p.m.position.addScaledVector(p.v,dt);p.m.scale.multiplyScalar(.96);
 if(p.life<=0){this.scene.remove(p.m);return false;}return true;});
-if(this.nova){this.nova.r+=dt*22;this.nova.m.scale.set(this.nova.r,this.nova.r,this.nova.r);
+if(this.nova){
+this.nova.r+=dt*22;this.nova.m.scale.set(this.nova.r,this.nova.r,this.nova.r);
 this.nova.m.material.opacity=Math.max(0,1-this.nova.r/10);
-if(this.nova.r>=10){this.scene.remove(this.nova.m);this.nova=null;}}
+if(this.nova.r>=10){this.scene.remove(this.nova.m);this.nova=null;}
+}
 this.hitFlash=Math.max(0,this.hitFlash-dt);
 this.hud();},
-hud(){$("bf-bossbar").style.width=Math.max(0,this.bhp/this.bmax*100)+"%";
+hud(){
+const ti=this.tier();
+$("bf-bossbar").style.width=Math.max(0,this.bhp/this.bmax*100)+"%";
 $("bf-bosshp").textContent=Math.max(0,Math.ceil(this.bhp))+" / "+this.bmax;
 $("bf-level").textContent=this.level;
 $("bf-hpbar").style.width=Math.max(0,this.hp)+"%";
@@ -3434,65 +3675,94 @@ $("bf-hp").textContent=Math.max(0,Math.ceil(this.hp));
 $("bf-heals").textContent=this.heals;$("bf-heals2").textContent=this.heals;
 $("bf-nova-cd").textContent=this.novaCd>0?Math.ceil(this.novaCd)+"s":"READY";
 $("bf-score").textContent=this.score;$("bf-used").textContent=this.used.size;
-$("bf-vignette").style.opacity=this.hitFlash>0?0.55:0;},
+$("bf-vignette").style.opacity=this.hitFlash>0?0.55:0;
+const c=$("bf-tier");c.textContent=ti.name;c.style.color=ti.col;c.style.borderColor=ti.col;},
 dmgOf(w){const n=w.length,base=n<=2?0:n===3?1:n===4?2:n===5?4:n===6?6:12+n*2;
 let pts=0;for(const ch of w)pts+=BF_PTS[ch]||0;return base+pts;},
-openType(){if(!this.on||this.over||this.paused||this.typing)return;this.typing=true;
+openType(){
+if(!this.on||this.over||this.paused||this.typing)return;
+this.typing=true;this.typeT=1.2;
 if(document.pointerLockElement)document.exitPointerLock();
 $("bf-type").classList.remove("hide");$("bf-input").value="";$("bf-type-msg").textContent="";
+const w=$("bf-type-warn");
+w.innerHTML=this.mobile?'<i class="fa-solid fa-pause"></i> Fight paused while you type':'<i class="fa-solid fa-triangle-exclamation"></i> Boss keeps attacking! ← ↑ → ↓ dodge · Shift slide';
+w.style.color=this.mobile?"#8ce7ad":"#ff9db1";
 setTimeout(()=>$("bf-input").focus(),40);},
-closeType(){this.typing=false;$("bf-type").classList.add("hide");},
-submit(){const w=$("bf-input").value.trim().toUpperCase().replace(/[^A-Z]/g,"");if(!w)return;
+closeType(){this.typing=false;this.keys={};$("bf-type").classList.add("hide");},
+submit(){
+const w=$("bf-input").value.trim().toUpperCase().replace(/[^A-Z]/g,"");if(!w)return;
 const msg=$("bf-type-msg");
 if(!(Dict.set.has(w)||w==="A"||w==="I")){msg.textContent="“"+w.toLowerCase()+"” is not in the dictionary.";Sfx.err();return;}
 if(this.used.has(w)){msg.textContent="Already used — words can't repeat this run!";Sfx.err();return;}
 const dmg=this.dmgOf(w);this.used.add(w);this.found.add(w.toLowerCase());this.score+=dmg;this.dmgTotal+=dmg;
-const T=this.T,m=new T.Mesh(new T.SphereGeometry(.3,8,8),new T.MeshStandardMaterial({color:0x22d3ee,emissive:0x0e7490}));
+const T=this.T,m=new T.Mesh(this.G.bul,this.M.shot);
 m.position.set(this.px,1.5,this.pz);this.scene.add(m);this.shots.push({m,dmg});
 renderFound("bf",this.found);this.closeType();Sfx.place();
 this.float("“"+w.toLowerCase()+"” → "+dmg+" dmg","#22d3ee");},
 float(txt,col){const el=document.createElement("div");el.className="bf-float";el.style.color=col||"#ffd48a";el.textContent=txt;
 $("bf-floats").appendChild(el);setTimeout(()=>el.remove(),1100);},
-hitBoss(d){this.bhp-=d;this.float("−"+d,"#f0abfc");Sfx.clear();
+hitBoss(d){
+this.bhp-=d;this.float("−"+d,"#f0abfc");Sfx.clear();
 const T=this.T;
-for(let i=0;i<8;i++){const m=new T.Mesh(new T.SphereGeometry(.22,6,6),new T.MeshStandardMaterial({color:0xc4b5fd,emissive:0x7c3aed}));
+for(let i=0;i<8;i++){
+const m=new T.Mesh(this.G.bul,this.M.part);m.scale.set(.7,.7,.7);
 m.position.copy(this.boss.position);this.scene.add(m);
-this.parts.push({m,v:new T.Vector3((Math.random()-.5)*10,(Math.random()-.2)*10,(Math.random()-.5)*10),life:.7});}
+this.parts.push({m,v:new T.Vector3((Math.random()-.5)*10,(Math.random()-.2)*10,(Math.random()-.5)*10),life:.7});
+}
 if(this.bhp<=0)this.levelClear();
 this.hud();},
-levelClear(){this.level++;this.heals++;this.hp=Math.min(100,this.hp+25);
+levelClear(){
+this.level++;this.heals++;this.hp=Math.min(100,this.hp+25);
 if(this.level>state.best.boss){state.best.boss=this.level;save();bestChip();}
 $("bf-clear-txt").textContent="Level "+(this.level-1)+" cleared! Next boss HP: "+Math.round(this.level*this.level*(this.mobile?50:100))+" · +1 heal · +25 HP";
 $("bf-clear").classList.remove("hide");Sfx.win();
-this.paused=true;if(document.pointerLockElement)document.exitPointerLock();},
-next(){$("bf-clear").classList.add("hide");this.spawnBoss();this.paused=false;
+this.paused=true;this.closeType();
+if(document.pointerLockElement)document.exitPointerLock();},
+next(){
+$("bf-clear").classList.add("hide");this.spawnBoss();this.paused=false;
 this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));this.hud();},
-die(){this.over=true;this.hp=0;this.hud();cancelAnimationFrame(this.raf);
+die(){
+this.over=true;this.hp=0;this.hud();cancelAnimationFrame(this.raf);
+this.closeType();
 if(document.pointerLockElement)document.exitPointerLock();
 if(this.level>state.best.boss){state.best.boss=this.level;save();bestChip();}
 $("bf-final-level").textContent=this.level;$("bf-final-dmg").textContent=this.dmgTotal;$("bf-final-words").textContent=this.used.size;
 $("bf-over").classList.remove("hide");Sfx.lose();},
 slide(){if(this.slideCd>0||!this.on||this.paused||this.over)return;this.slideCd=2;this.slideT=.22;this.inv=.55;Sfx.tap();},
-nova(){if(this.novaCd>0||!this.on||this.paused||this.over)return;this.novaCd=12;
-const T=this.T,m=new T.Mesh(new T.TorusGeometry(1,.08,8,40),new T.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:1}));
-m.rotation.x=Math.PI/2;m.position.set(this.px,.6,this.pz);this.scene.add(m);this.nova={m,r:.5};
+nova(){
+if(this.novaCd>0||!this.on||this.paused||this.over)return;
+this.novaCd=12;
+const T=this.T,m=new T.Mesh(this.G.wave,this.M.nova.clone());
+m.rotation.x=-Math.PI/2;m.position.set(this.px,.6,this.pz);this.scene.add(m);this.nova={m,r:.5};
 this.projs=this.projs.filter(p=>{if(Math.hypot(p.m.position.x-this.px,p.m.position.z-this.pz)<10){this.scene.remove(p.m);return false;}return true;});
+this.waves=this.waves.filter(w=>{if(Math.hypot(w.x-this.px,w.z-this.pz)<11){this.scene.remove(w.m);return false;}return true;});
 if(Math.hypot(this.boss.position.x-this.px,this.boss.position.z-this.pz)<11)this.hitBoss(5+this.level*2);
 Sfx.clear();},
-heal(){if(!this.on||this.over)return;
+heal(){
+if(!this.on||this.over)return;
 if(this.heals<1){toast("No heal items — collect the green orbs.","err");return;}
 if(this.hp>=100){toast("HP is already full.");return;}
 this.heals--;this.hp=Math.min(100,this.hp+40);Sfx.clear();this.hud();},
-pause(v){if(!this.on||this.over)return;const p=v===true?true:!this.paused;
-if(p===this.paused)return;this.paused=p;
+pause(v){
+if(!this.on||this.over)return;
+const p=v===true?true:!this.paused;
+if(p===this.paused)return;
+this.paused=p;
 $("bf-paused").classList.toggle("hide",!p);
-if(p){cancelAnimationFrame(this.raf);this.closeType();if(document.pointerLockElement)document.exitPointerLock();}
+if(p){cancelAnimationFrame(this.raf);this.closeType();bfRenderAI();if(document.pointerLockElement)document.exitPointerLock();}
 else{this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));}}
 };
 $("bf-form").addEventListener("submit",e=>{e.preventDefault();BF.submit();});
-$("bf-input").addEventListener("keydown",e=>{if(e.key==="Escape"){e.preventDefault();BF.closeType();}});
+$("bf-input").addEventListener("keydown",e=>{
+if(e.key==="Escape"){e.preventDefault();BF.closeType();return;}
+if(BF.mobile)return;
+const k=e.key.toLowerCase();
+if(k==="arrowup"||k==="arrowdown"||k==="arrowleft"||k==="arrowright"){e.preventDefault();BF.keys[k]=true;}
+else if(e.key==="Shift"){BF.slide();}
+});
 $("bf-sens").addEventListener("input",e=>{state.bfcfg.sens=+e.target.value;$("bf-sens-val").textContent=e.target.value;save();});
 $("bf-atk").addEventListener("change",e=>{state.bfcfg.atk=e.target.value;save();});
+$("bf-ai2").addEventListener("change",e=>{state.bfcfg.ai=e.target.value;save();bfRenderAI();toast("Boss AI: "+bfTier(e.target.value).name,"ok");});
 (function(){
 const st=$("bf-stage");
 st.addEventListener("contextmenu",e=>e.preventDefault());
@@ -3502,7 +3772,7 @@ if(document.pointerLockElement!==BF.ren.domElement){try{BF.ren.domElement.reques
 const a=state.bfcfg.atk;
 if((a==="m1"&&e.button===0)||(a==="m2"&&e.button===2))BF.openType();});
 document.addEventListener("mousemove",e=>{
-if(!BF.on||BF.paused||BF.over||!BF.ren)return;
+if(!BF.on||BF.paused||BF.over||!BF.ren||BF.typing)return;
 if(document.pointerLockElement===BF.ren.domElement){
 BF.yaw-=e.movementX*.0022*state.bfcfg.sens;
 BF.pitch=Math.max(-1.2,Math.min(1.2,BF.pitch-e.movementY*.0022*state.bfcfg.sens));}});
@@ -3532,7 +3802,7 @@ const tag=e.target.tagName;if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT")re
 const k=e.key.toLowerCase();
 if(k==="p"){e.preventDefault();BF.pause();return;}
 if(BF.paused||BF.over)return;
-if(k==="w"||k==="a"||k==="s"||k==="d"){BF.keys[k]=true;e.preventDefault();}
+if(k==="w"||k==="a"||k==="s"||k==="d"||k==="arrowup"||k==="arrowdown"||k==="arrowleft"||k==="arrowright"){BF.keys[k]=true;e.preventDefault();}
 else if(k==="e")BF.slide();
 else if(k==="q")BF.nova();
 else if(k==="h")BF.heal();
@@ -3699,9 +3969,9 @@ case"sq-lens":SQ.toggleLens();break;
 case"sq-found-toggle":toggleFound("sq");break;
 case"sol-start":SOL.start();break;
 case"sol-setup":SOL.setup();break;
-case"sol-tap":SOL.tap(el.dataset.loc,+el.dataset.i);break;
-case"sol-undo":SOL.undo();break;
-case"sol-auto":SOL.auto();break;
+case"sol-hint":SOL.hint();break;
+case"sol-found-toggle":toggleFound("sol");break;
+case"bf-ai":state.bfcfg.ai=el.dataset.ai;save();bfRenderAI();Sfx.tap();break;
 case"bf-start":BF.start();break;
 case"bf-setup":BF.setup();break;
 case"bf-pause":BF.pause();break;
@@ -3763,7 +4033,7 @@ return;
 }
 if(Games.tab==="solitaire"&&!$("sol-active").classList.contains("hide")){
 const k=e.key.toLowerCase();
-if(k==="u")SOL.undo();else if(k==="d")SOL.draw();else if(k==="n")SOL.start();
+if(k==="h")SOL.hint();else if(k==="n")SOL.start();
 return;
 }
 if(Games.tab==="tetris"&&T.started&&!$("t-active").classList.contains("hide")){
@@ -3790,6 +4060,7 @@ window.addEventListener("hashchange",autoAddFromLink);
 load();nwApply();renderVaults();renderWords();renderSound();bestChip();renderAcct();renderHome();
 $("w-wins").textContent=state.wordle.wins;$("w-streak").textContent=state.wordle.streak;$("w-score").textContent=state.wordle.score;
 $("bf-sens").value=state.bfcfg.sens;$("bf-sens-val").textContent=state.bfcfg.sens;$("bf-atk").value=state.bfcfg.atk;
+bfRenderAI();
 autoAddFromLink();
 setTimeout(()=>Dict.load(),900);
 setTimeout(()=>nwUpdate(false),2600);
