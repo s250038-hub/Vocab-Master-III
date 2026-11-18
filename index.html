@@ -335,16 +335,18 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 .sol-chain-row .found-chip{flex-shrink:0}
 .sol-arrow{color:var(--dim);font-weight:800;flex-shrink:0}
 #sol-lives{color:var(--red);font-size:16px;letter-spacing:2px}
-#bf-stage{position:relative;height:min(60vh,520px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);background:#070b16;touch-action:none}
+#bf-stage{position:relative;height:min(60vh,520px);border-radius:16px;overflow:hidden;border:1px solid var(--line2);background:#070b16;touch-action:none;cursor:crosshair}
 #bf-stage canvas{display:block;width:100%;height:100%}
 .bf-hud{position:absolute;z-index:5;pointer-events:none}
 #bf-vignette{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(circle,transparent 38%,rgba(244,63,94,.55));opacity:0;transition:opacity .12s}
-#bf-cross{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:rgba(255,255,255,.8);z-index:5;pointer-events:none}
+#bf-cross{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:rgba(255,255,255,.8);z-index:5;pointer-events:none;box-shadow:0 0 6px rgba(0,0,0,.9)}
 #bf-floats{position:absolute;left:0;right:0;top:22%;z-index:6;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
 .bf-float{font-weight:800;font-size:20px;text-shadow:0 2px 10px rgba(0,0,0,.9);animation:bfloat 1.1s ease forwards}
 .bf-cast{font-size:15px;letter-spacing:.18em;text-transform:uppercase;animation:bfloat 1.2s ease forwards}
 @keyframes bfloat{from{opacity:0;transform:translateY(10px)}18%{opacity:1}to{opacity:0;transform:translateY(-26px)}}
 #bf-type{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(4,7,15,.42);backdrop-filter:blur(2px)}
+#bf-lockhint{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);z-index:6;pointer-events:none;animation:lockpulse 1.8s ease-in-out infinite}
+@keyframes lockpulse{0%,100%{opacity:.65}50%{opacity:1}}
 .bf-touch{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 .bf-touch .btn{min-width:74px}
 .bf-ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
@@ -352,7 +354,8 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 .bf-ai-btn i{font-size:17px}
 .bf-ai-btn:hover{background:rgba(255,255,255,.09);transform:translateY(-1px)}
 .bf-ai-btn.on{box-shadow:0 0 0 1px currentColor,0 8px 20px -10px currentColor}
-@media(max-width:560px){#bf-stage{height:52vh}.bf-ai-grid{grid-template-columns:repeat(3,1fr)}}
+@media(pointer:coarse){.bf-pconly{display:none!important}}
+@media(max-width:560px){#bf-stage{height:52vh}.bf-ai-grid{grid-template-columns:repeat(3,1fr)}#bf-lockhint{bottom:38px}}
 </style>
 </head>
 <body>
@@ -1132,7 +1135,8 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <li><i class="fa-solid fa-check"></i> Boss HP = level² × 100 (mobile: level² × 50). Beat it, level up, forever.</li>
 <li><i class="fa-solid fa-check"></i> The boss casts <b>telegraphed skills</b> — aimed bolts, spread fans, radial bursts, sky rain, sweeping lasers, spiral storms, bullet walls with gaps, hunter orbs, ground slams and cross lasers. Read the warning, then dodge.</li>
 <li><i class="fa-solid fa-check"></i> WASD / arrows move · mouse look · <b>E</b> slide (i-frames) · <b>Q</b> nova (clears bullets &amp; shockwaves) · <b>H</b> heal. Green orbs refill heals.</li>
-<li><i class="fa-solid fa-check"></i> <b style="color:#ff9db1">On PC the fight does NOT stop while you type.</b> The boss keeps casting and can hit you — dodge with the arrow keys and slide with Shift without leaving the word box. On mobile the fight pauses while typing.</li>
+<li><i class="fa-solid fa-check"></i> <b style="color:#ff9db1">On PC the fight does NOT stop while you type.</b> The boss keeps casting and can hit you — dodge with the arrow keys and slide with Shift without leaving the word box.</li>
+<li><i class="fa-solid fa-check"></i> <b style="color:#8ce7ad">Mouse look resumes by itself after every shot</b> — the pointer re-locks the instant you fire, and free-look keeps working even if the browser blocks the lock. No extra click needed.</li>
 <li><i class="fa-solid fa-check"></i> Damage = length bonus (3→1, 4→2, 5→4, 6→6, 7+→12+2×len) + letter points: 1 pt A E I O U L N S T R D G · 2 pts B C M P F H V W Y · 4 pts K J X · 6 pts Q Z. No word repeats in a run.</li>
 </ul>
 <div class="card pad mb-3" style="max-width:470px;margin:0 auto;text-align:left;background:rgba(244,63,94,.07)">
@@ -1158,6 +1162,7 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <option value="f">F key</option>
 <option value="t">T key</option>
 </select>
+<label class="radio-row mt-2" style="padding-left:0"><input type="checkbox" id="bf-autolock" checked> Re-lock the mouse automatically after firing</label>
 </div>
 <button class="btn btn-v btn-big" data-action="bf-start"><i class="fa-solid fa-play"></i> Enter the arena</button>
 <p class="t-xs dim mt-2">The 3D engine (Three.js) downloads once on first start.</p>
@@ -1165,7 +1170,12 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <div id="bf-active" class="hide board-wrap">
 <div class="row between wrap gap-2 mb-2">
 <span class="t-xs dim bold">LEXICON TITAN</span>
-<div class="row gap-1"><button class="btn btn-xs btn-v" data-action="bf-pause"><i class="fa-solid fa-pause"></i> Pause</button><button class="btn btn-xs btn-g" data-action="bf-setup"><i class="fa-solid fa-sliders"></i> Setup</button><button class="btn btn-xs btn-g" data-action="bf-start"><i class="fa-solid fa-rotate-right"></i> Restart run</button></div>
+<div class="row gap-1">
+<button class="btn btn-xs btn-g bf-pconly" data-action="bf-lock" title="Lock the mouse to the arena (L)"><i class="fa-solid fa-computer-mouse"></i> Lock mouse</button>
+<button class="btn btn-xs btn-v" data-action="bf-pause"><i class="fa-solid fa-pause"></i> Pause</button>
+<button class="btn btn-xs btn-g" data-action="bf-setup"><i class="fa-solid fa-sliders"></i> Setup</button>
+<button class="btn btn-xs btn-g" data-action="bf-start"><i class="fa-solid fa-rotate-right"></i> Restart run</button>
+</div>
 </div>
 <div id="bf-stage">
 <div class="bf-hud" style="top:10px;left:12px;right:12px">
@@ -1176,10 +1186,15 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 <div class="row between t-xs bold" style="color:#8ce7ad"><span><i class="fa-solid fa-heart"></i> You · <span id="bf-hp">100</span> HP</span><span>✚ <span id="bf-heals">1</span></span></div>
 <div class="progress mt-1"><i id="bf-hpbar" style="width:100%;background:linear-gradient(90deg,#22c55e,#15803d)"></i></div>
 </div>
-<div class="bf-hud" style="bottom:10px;right:12px;display:flex;gap:6px"><span class="chip t-xs" id="bf-tier">Medium</span><span class="chip chip-v t-xs">NOVA <b id="bf-nova-cd">READY</b></span></div>
+<div class="bf-hud" style="bottom:10px;right:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+<span class="chip t-xs bf-pconly" id="bf-look">FREE LOOK</span>
+<span class="chip t-xs" id="bf-tier">Medium</span>
+<span class="chip chip-v t-xs">NOVA <b id="bf-nova-cd">READY</b></span>
+</div>
 <div id="bf-cross"></div>
 <div id="bf-vignette"></div>
 <div id="bf-floats"></div>
+<div id="bf-lockhint" class="hide bf-pconly"><span class="chip chip-a t-xs"><i class="fa-solid fa-computer-mouse"></i> Move to look · click to lock the pointer</span></div>
 <div id="bf-type" class="hide">
 <div class="card pad" style="width:min(370px,92%);text-align:center">
 <span class="label"><i class="fa-solid fa-keyboard" style="color:var(--cyan)"></i> Type a word to attack</span>
@@ -1192,7 +1207,7 @@ input[type=checkbox],input[type=radio]{accent-color:var(--blue);width:16px;heigh
 </form>
 <p class="t-xs mt-2" style="color:var(--red);min-height:16px" id="bf-type-msg"></p>
 <p class="t-xs bold" id="bf-type-warn" style="min-height:16px"></p>
-<p class="t-xs dim">No repeats this run · Esc closes</p>
+<p class="t-xs dim">No repeats this run · Esc closes · mouse look returns on fire</p>
 </div>
 </div>
 </div>
@@ -1314,13 +1329,13 @@ return decodeURIComponent(escape(atob(t)));
 };
 /* ---------- persistent state ---------- */
 const KEY="vocabMaster.v5";
-let state={vaults:{},activeId:"default",sound:true,best:{tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},wordle:{wins:0,streak:0,score:0},sent:{tries:0,best:0,total:0},recent:[],lastVault:null,updatedAt:0,cloud:{on:false,name:"",ref:null},bfcfg:{sens:1.2,atk:"m1",ai:"medium"}};
+let state={vaults:{},activeId:"default",sound:true,best:{tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},wordle:{wins:0,streak:0,score:0},sent:{tries:0,best:0,total:0},recent:[],lastVault:null,updatedAt:0,cloud:{on:false,name:"",ref:null},bfcfg:{sens:1.2,atk:"m1",ai:"medium",autolock:true}};
 function seed(){state.vaults={default:{name:"My Vault",words:[]}};}
 function save(){state.updatedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}cloudSchedule();}
 function load(){
 try{
 const raw=localStorage.getItem(KEY);
-if(raw){const p=JSON.parse(raw);if(p&&p.vaults&&Object.keys(p.vaults).length){state=Object.assign(state,p);state.best=Object.assign({tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},p.best||{});state.bfcfg=Object.assign({sens:1.2,atk:"m1",ai:"medium"},p.bfcfg||{});state.wordle=Object.assign({wins:0,streak:0,score:0},p.wordle||{});state.sent=Object.assign({tries:0,best:0,total:0},p.sent||{});state.cloud=Object.assign({on:false,name:"",ref:null},p.cloud||{});if(!state.cloud.ref)state.cloud.on=false;state.recent=Array.isArray(p.recent)?p.recent:[];state.lastVault=p.lastVault||null;state.updatedAt=p.updatedAt||0;if(!state.vaults[state.activeId])state.activeId=Object.keys(state.vaults)[0];return;}}
+if(raw){const p=JSON.parse(raw);if(p&&p.vaults&&Object.keys(p.vaults).length){state=Object.assign(state,p);state.best=Object.assign({tetris:0,blocky:0,scrabble:0,bee:0,spellmaster:0,birds:0,squaredle:0,solitaire:0,boss:0},p.best||{});state.bfcfg=Object.assign({sens:1.2,atk:"m1",ai:"medium",autolock:true},p.bfcfg||{});state.wordle=Object.assign({wins:0,streak:0,score:0},p.wordle||{});state.sent=Object.assign({tries:0,best:0,total:0},p.sent||{});state.cloud=Object.assign({on:false,name:"",ref:null},p.cloud||{});if(!state.cloud.ref)state.cloud.on=false;state.recent=Array.isArray(p.recent)?p.recent:[];state.lastVault=p.lastVault||null;state.updatedAt=p.updatedAt||0;if(!state.vaults[state.activeId])state.activeId=Object.keys(state.vaults)[0];return;}}
 const old=localStorage.getItem("vocabMaster.v4")||localStorage.getItem("vocabMaster.v3")||localStorage.getItem("vocabMasterVaults");
 if(old){
 let p=JSON.parse(old),ov=p&&p.vaults?p.vaults:p;
@@ -3395,7 +3410,7 @@ $("sol-over").classList.remove("hide");
 }
 };
 $("sol-form").addEventListener("submit",e=>{e.preventDefault();SOL.submit();});
-/* ---------- WORD BOSS 3D (10/10) — skill-based AI ---------- */
+/* ---------- WORD BOSS 3D (10/10) — skill AI + seamless mouse look ---------- */
 const BF_PTS={A:1,E:1,I:1,O:1,U:1,L:1,N:1,S:1,T:1,R:1,D:1,G:1,B:2,C:2,M:2,P:2,F:2,H:2,V:2,W:2,Y:2,K:4,J:4,X:4,Q:6,Z:6};
 const BF_TIERS=[
 {id:"easy",name:"Easy",col:"#22c55e",cd:2.7,spd:.78,tele:1.25,dens:.7,dmg:6,skills:["bolt","fan"]},
@@ -3424,6 +3439,7 @@ const BF={on:false,paused:false,over:false,typing:false,level:1,score:0,dmgTotal
 T:null,scene:null,cam:null,ren:null,boss:null,ring:null,core:null,G:null,M:null,
 projs:[],shots:[],orbs:[],parts:[],beams:[],waves:[],marks:[],casts:[],nova:null,
 yaw:0,pitch:0,px:0,pz:12,keys:{},slideT:0,slideCd:0,novaCd:0,inv:0,fireT:2,orbT:8,typeT:0,raf:0,last:0,mobile:false,joy:null,look:null,hitFlash:0,shake:0,lastSkill:"",loader:null,
+locked:false,selfExit:false,hover:false,lockFail:false,lockTimer:null,
 load(){if(window.THREE)return Promise.resolve();
 this.loader=this.loader||new Promise((res,rej)=>{const s=document.createElement("script");
 s.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
@@ -3431,6 +3447,23 @@ s.onload=()=>res();s.onerror=()=>{this.loader=null;rej(new Error("3D engine fail
 document.head.appendChild(s);});
 return this.loader;},
 tier(){return bfTier(state.bfcfg.ai);},
+/* ---- pointer lock: auto re-acquire after firing, free-look fallback ---- */
+tryLock(){
+if(this.mobile||!this.ren||!this.on||this.over||this.paused||this.typing)return;
+const el=this.ren.domElement;
+if(document.pointerLockElement===el)return;
+try{const p=el.requestPointerLock();if(p&&typeof p.catch==="function")p.catch(()=>{});}catch(e){}
+clearTimeout(this.lockTimer);
+this.lockTimer=setTimeout(()=>{
+if(this.on&&!this.over&&!this.paused&&!this.typing&&!this.mobile&&this.ren&&document.pointerLockElement!==this.ren.domElement){
+try{const p=this.ren.domElement.requestPointerLock();if(p&&typeof p.catch==="function")p.catch(()=>{});}catch(e){}
+}
+},420);
+},
+releaseLock(){
+clearTimeout(this.lockTimer);
+if(document.pointerLockElement){this.selfExit=true;try{document.exitPointerLock();}catch(e){}}
+},
 setup(){this.pause(true);$("bf-active").classList.add("hide");$("bf-setup").classList.remove("hide");bfRenderAI();},
 async start(){
 try{await this.load();}catch(e){toast("Couldn't load the 3D engine — check your connection.","err");return;}
@@ -3438,13 +3471,15 @@ this.mobile=matchMedia("(pointer:coarse)").matches;
 this.on=true;this.paused=false;this.over=false;this.typing=false;
 this.level=1;this.score=0;this.dmgTotal=0;this.used.clear();this.found.clear();this.heals=1;this.hp=100;
 this.px=0;this.pz=12;this.yaw=0;this.pitch=0;this.keys={};this.slideT=0;this.slideCd=0;this.novaCd=0;this.inv=0;this.orbT=8;this.typeT=0;this.joy=null;this.look=null;this.hitFlash=0;this.shake=0;this.lastSkill="";
+this.locked=false;this.selfExit=false;this.lockFail=false;this.hover=false;
 this.initScene();this.spawnBoss();
 $("bf-setup").classList.add("hide");$("bf-active").classList.remove("hide");
 $("bf-over").classList.add("hide");$("bf-paused").classList.add("hide");$("bf-clear").classList.add("hide");$("bf-type").classList.add("hide");
 $("bf-touch").classList.toggle("hide",!this.mobile);
-$("bf-hintline").textContent=this.mobile?"Left half: move · drag right half: look · buttons below · the fight pauses while you type":"Click arena to lock mouse · "+this.atkLabel()+" opens the word box · WHILE TYPING: arrow keys dodge, Shift slides · P pauses";
+$("bf-hintline").textContent=this.mobile?"Left half: move · drag right half: look · buttons below · the fight pauses while you type":"Mouse look is automatic — it re-locks after every shot · "+this.atkLabel()+" opens the word box · arrows dodge & Shift slides while typing · L re-locks · P pauses";
 bfRenderAI();this.resize();renderFound("bf",this.found);this.hud();
-this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));},
+this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));
+this.tryLock();},
 atkLabel(){const a=state.bfcfg.atk;return a==="m1"?"M1 (left click)":a==="m2"?"M2 (right click)":a.toUpperCase();},
 initScene(){const T=window.THREE;this.T=T;
 if(this.ren){this.clearField();return;}
@@ -3676,19 +3711,33 @@ $("bf-heals").textContent=this.heals;$("bf-heals2").textContent=this.heals;
 $("bf-nova-cd").textContent=this.novaCd>0?Math.ceil(this.novaCd)+"s":"READY";
 $("bf-score").textContent=this.score;$("bf-used").textContent=this.used.size;
 $("bf-vignette").style.opacity=this.hitFlash>0?0.55:0;
-const c=$("bf-tier");c.textContent=ti.name;c.style.color=ti.col;c.style.borderColor=ti.col;},
+const c=$("bf-tier");c.textContent=ti.name;c.style.color=ti.col;c.style.borderColor=ti.col;
+const lk=$("bf-look");
+if(lk){
+lk.textContent=this.locked?"MOUSE LOCKED":"FREE LOOK";
+lk.style.color=this.locked?"#8ce7ad":"#ffd48a";
+lk.style.borderColor=this.locked?"rgba(34,197,94,.5)":"rgba(245,165,36,.5)";
+}
+const lh=$("bf-lockhint");
+if(lh)lh.classList.toggle("hide",this.mobile||this.locked||!this.on||this.over||this.paused||this.typing);
+},
 dmgOf(w){const n=w.length,base=n<=2?0:n===3?1:n===4?2:n===5?4:n===6?6:12+n*2;
 let pts=0;for(const ch of w)pts+=BF_PTS[ch]||0;return base+pts;},
 openType(){
 if(!this.on||this.over||this.paused||this.typing)return;
-this.typing=true;this.typeT=1.2;
-if(document.pointerLockElement)document.exitPointerLock();
+this.typing=true;this.typeT=1.2;this.keys={};
+this.releaseLock();
 $("bf-type").classList.remove("hide");$("bf-input").value="";$("bf-type-msg").textContent="";
 const w=$("bf-type-warn");
 w.innerHTML=this.mobile?'<i class="fa-solid fa-pause"></i> Fight paused while you type':'<i class="fa-solid fa-triangle-exclamation"></i> Boss keeps attacking! ← ↑ → ↓ dodge · Shift slide';
 w.style.color=this.mobile?"#8ce7ad":"#ff9db1";
+this.hud();
 setTimeout(()=>$("bf-input").focus(),40);},
-closeType(){this.typing=false;this.keys={};$("bf-type").classList.add("hide");},
+closeType(relock){
+this.typing=false;this.keys={};
+$("bf-type").classList.add("hide");
+if(relock!==false&&!this.mobile&&state.bfcfg.autolock!==false)this.tryLock();
+this.hud();},
 submit(){
 const w=$("bf-input").value.trim().toUpperCase().replace(/[^A-Z]/g,"");if(!w)return;
 const msg=$("bf-type-msg");
@@ -3697,7 +3746,9 @@ if(this.used.has(w)){msg.textContent="Already used — words can't repeat this r
 const dmg=this.dmgOf(w);this.used.add(w);this.found.add(w.toLowerCase());this.score+=dmg;this.dmgTotal+=dmg;
 const T=this.T,m=new T.Mesh(this.G.bul,this.M.shot);
 m.position.set(this.px,1.5,this.pz);this.scene.add(m);this.shots.push({m,dmg});
-renderFound("bf",this.found);this.closeType();Sfx.place();
+renderFound("bf",this.found);
+this.closeType();
+Sfx.place();
 this.float("“"+w.toLowerCase()+"” → "+dmg+" dmg","#22d3ee");},
 float(txt,col){const el=document.createElement("div");el.className="bf-float";el.style.color=col||"#ffd48a";el.textContent=txt;
 $("bf-floats").appendChild(el);setTimeout(()=>el.remove(),1100);},
@@ -3716,15 +3767,14 @@ this.level++;this.heals++;this.hp=Math.min(100,this.hp+25);
 if(this.level>state.best.boss){state.best.boss=this.level;save();bestChip();}
 $("bf-clear-txt").textContent="Level "+(this.level-1)+" cleared! Next boss HP: "+Math.round(this.level*this.level*(this.mobile?50:100))+" · +1 heal · +25 HP";
 $("bf-clear").classList.remove("hide");Sfx.win();
-this.paused=true;this.closeType();
-if(document.pointerLockElement)document.exitPointerLock();},
+this.paused=true;this.closeType(false);this.releaseLock();this.hud();},
 next(){
 $("bf-clear").classList.add("hide");this.spawnBoss();this.paused=false;
-this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));this.hud();},
+this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));
+this.hud();this.tryLock();},
 die(){
-this.over=true;this.hp=0;this.hud();cancelAnimationFrame(this.raf);
-this.closeType();
-if(document.pointerLockElement)document.exitPointerLock();
+this.over=true;this.hp=0;cancelAnimationFrame(this.raf);
+this.closeType(false);this.releaseLock();this.hud();
 if(this.level>state.best.boss){state.best.boss=this.level;save();bestChip();}
 $("bf-final-level").textContent=this.level;$("bf-final-dmg").textContent=this.dmgTotal;$("bf-final-words").textContent=this.used.size;
 $("bf-over").classList.remove("hide");Sfx.lose();},
@@ -3749,8 +3799,9 @@ const p=v===true?true:!this.paused;
 if(p===this.paused)return;
 this.paused=p;
 $("bf-paused").classList.toggle("hide",!p);
-if(p){cancelAnimationFrame(this.raf);this.closeType();bfRenderAI();if(document.pointerLockElement)document.exitPointerLock();}
-else{this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));}}
+if(p){cancelAnimationFrame(this.raf);this.closeType(false);this.releaseLock();bfRenderAI();}
+else{this.last=performance.now();cancelAnimationFrame(this.raf);this.raf=requestAnimationFrame(t=>this.loop(t));this.tryLock();}
+this.hud();}
 };
 $("bf-form").addEventListener("submit",e=>{e.preventDefault();BF.submit();});
 $("bf-input").addEventListener("keydown",e=>{
@@ -3762,23 +3813,39 @@ else if(e.key==="Shift"){BF.slide();}
 });
 $("bf-sens").addEventListener("input",e=>{state.bfcfg.sens=+e.target.value;$("bf-sens-val").textContent=e.target.value;save();});
 $("bf-atk").addEventListener("change",e=>{state.bfcfg.atk=e.target.value;save();});
+$("bf-autolock").addEventListener("change",e=>{state.bfcfg.autolock=e.target.checked;save();});
 $("bf-ai2").addEventListener("change",e=>{state.bfcfg.ai=e.target.value;save();bfRenderAI();toast("Boss AI: "+bfTier(e.target.value).name,"ok");});
 (function(){
 const st=$("bf-stage");
 st.addEventListener("contextmenu",e=>e.preventDefault());
+st.addEventListener("mouseenter",()=>{BF.hover=true;});
+st.addEventListener("mouseleave",()=>{BF.hover=false;});
 st.addEventListener("mousedown",e=>{
 if(BF.mobile||!BF.on||BF.paused||BF.over||BF.typing)return;
-if(document.pointerLockElement!==BF.ren.domElement){try{BF.ren.domElement.requestPointerLock();}catch(err){}return;}
+const locked=document.pointerLockElement===BF.ren.domElement;
+if(!locked&&!BF.lockFail){BF.tryLock();return;}
 const a=state.bfcfg.atk;
 if((a==="m1"&&e.button===0)||(a==="m2"&&e.button===2))BF.openType();});
 document.addEventListener("mousemove",e=>{
-if(!BF.on||BF.paused||BF.over||!BF.ren||BF.typing)return;
-if(document.pointerLockElement===BF.ren.domElement){
-BF.yaw-=e.movementX*.0022*state.bfcfg.sens;
-BF.pitch=Math.max(-1.2,Math.min(1.2,BF.pitch-e.movementY*.0022*state.bfcfg.sens));}});
+if(!BF.on||BF.paused||BF.over||BF.typing||BF.mobile||!BF.ren)return;
+const locked=document.pointerLockElement===BF.ren.domElement;
+if(!locked&&!BF.hover)return;
+const mx=Math.max(-90,Math.min(90,e.movementX||0)),my=Math.max(-90,Math.min(90,e.movementY||0));
+BF.yaw-=mx*.0022*state.bfcfg.sens;
+BF.pitch=Math.max(-1.2,Math.min(1.2,BF.pitch-my*.0022*state.bfcfg.sens));});
 document.addEventListener("pointerlockchange",()=>{
-if(!BF.on||BF.over||BF.typing||BF.paused||BF.mobile||!BF.ren)return;
-if(document.pointerLockElement!==BF.ren.domElement&&$("bf-clear").classList.contains("hide"))BF.pause(true);});
+if(!BF.ren)return;
+const locked=document.pointerLockElement===BF.ren.domElement;
+BF.locked=locked;
+if(locked){BF.selfExit=false;BF.lockFail=false;clearTimeout(BF.lockTimer);}
+else{
+if(BF.selfExit){BF.selfExit=false;if(BF.on)BF.hud();return;}
+if(BF.on&&!BF.over&&!BF.paused&&!BF.typing&&!BF.mobile)BF.pause(true);
+}
+if(BF.on)BF.hud();});
+document.addEventListener("pointerlockerror",()=>{
+BF.lockFail=true;BF.locked=false;
+if(BF.on&&!BF.over)BF.hud();});
 st.addEventListener("pointerdown",e=>{
 if(!BF.mobile||!BF.on||BF.paused||BF.over||BF.typing)return;
 const r=st.getBoundingClientRect(),x=e.clientX-r.left;
@@ -3796,11 +3863,13 @@ BF.look.x=e.clientX;BF.look.y=e.clientY;}});
 const end=e=>{if(BF.joy&&e.pointerId===BF.joy.id)BF.joy=null;if(BF.look&&e.pointerId===BF.look.id)BF.look=null;};
 st.addEventListener("pointerup",end);st.addEventListener("pointercancel",end);
 window.addEventListener("resize",()=>{if(Games.tab==="boss")BF.resize();});
+window.addEventListener("blur",()=>{BF.keys={};BF.hover=false;});
 document.addEventListener("keydown",e=>{
 if(Games.tab!=="boss"||!BF.on)return;
 const tag=e.target.tagName;if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT")return;
 const k=e.key.toLowerCase();
 if(k==="p"){e.preventDefault();BF.pause();return;}
+if(k==="l"){e.preventDefault();BF.tryLock();return;}
 if(BF.paused||BF.over)return;
 if(k==="w"||k==="a"||k==="s"||k==="d"||k==="arrowup"||k==="arrowdown"||k==="arrowleft"||k==="arrowright"){BF.keys[k]=true;e.preventDefault();}
 else if(k==="e")BF.slide();
@@ -3976,6 +4045,7 @@ case"bf-start":BF.start();break;
 case"bf-setup":BF.setup();break;
 case"bf-pause":BF.pause();break;
 case"bf-next":BF.next();break;
+case"bf-lock":BF.tryLock();break;
 case"bf-type-open":BF.openType();break;
 case"bf-type-close":BF.closeType();break;
 case"bf-slide":BF.slide();break;
@@ -4060,6 +4130,7 @@ window.addEventListener("hashchange",autoAddFromLink);
 load();nwApply();renderVaults();renderWords();renderSound();bestChip();renderAcct();renderHome();
 $("w-wins").textContent=state.wordle.wins;$("w-streak").textContent=state.wordle.streak;$("w-score").textContent=state.wordle.score;
 $("bf-sens").value=state.bfcfg.sens;$("bf-sens-val").textContent=state.bfcfg.sens;$("bf-atk").value=state.bfcfg.atk;
+$("bf-autolock").checked=state.bfcfg.autolock!==false;
 bfRenderAI();
 autoAddFromLink();
 setTimeout(()=>Dict.load(),900);
